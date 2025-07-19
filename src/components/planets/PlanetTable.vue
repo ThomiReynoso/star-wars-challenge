@@ -3,12 +3,32 @@
     <table class="data-table">
       <thead class="table-header">
         <tr>
-          <th class="table-th">Name</th>
+          <th class="table-th sortable" @click="sort('name')">
+            <div class="th-content">
+              <span>Name</span>
+              <div class="sort-indicator">
+                <span v-if="sortBy === 'name'" class="sort-icon">
+                  {{ sortOrder === 'asc' ? '↑' : '↓' }}
+                </span>
+                <span v-else class="sort-icon inactive">↕</span>
+              </div>
+            </div>
+          </th>
           <th class="table-th">Climate</th>
           <th class="table-th">Terrain</th>
           <th class="table-th">Population</th>
           <th class="table-th">Diameter</th>
-          <th class="table-th">Created</th>
+          <th class="table-th sortable" @click="sort('created')">
+            <div class="th-content">
+              <span>Created</span>
+              <div class="sort-indicator">
+                <span v-if="sortBy === 'created'" class="sort-icon">
+                  {{ sortOrder === 'asc' ? '↑' : '↓' }}
+                </span>
+                <span v-else class="sort-icon inactive">↕</span>
+              </div>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody class="table-body">
@@ -47,9 +67,26 @@ import { formatDate } from '@/utils'
 
 interface Props {
   planets: Planet[]
+  sortBy: 'name' | 'created'
+  sortOrder: 'asc' | 'desc'
 }
 
-defineProps<Props>()
+interface Emits {
+  sort: [field: 'name' | 'created', order: 'asc' | 'desc']
+}
+
+const props = defineProps<Props>()
+const emit = defineEmits<Emits>()
+
+const sort = (field: 'name' | 'created') => {
+  let newOrder: 'asc' | 'desc' = 'asc'
+  
+  if (props.sortBy === field) {
+    newOrder = props.sortOrder === 'asc' ? 'desc' : 'asc'
+  }
+  
+  emit('sort', field, newOrder)
+}
 
 const formatPopulation = (population: string): string => {
   if (population === 'unknown') return 'Unknown'
@@ -93,6 +130,40 @@ const formatPopulation = (population: string): string => {
   color: #D1D5DB;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  
+  &.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sort-indicator {
+  display: flex;
+  align-items: center;
+  min-width: 1rem;
+}
+
+.sort-icon {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #0066CC;
+  
+  &.inactive {
+    color: #6B7280;
+    opacity: 0.5;
+  }
 }
 
 .table-body {
