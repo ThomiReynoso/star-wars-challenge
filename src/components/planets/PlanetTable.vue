@@ -1,5 +1,5 @@
 <template>
-  <div class="table-container">
+  <div class="table-container" data-testid="planets-table">
     <table class="data-table">
       <thead class="table-header">
         <tr>
@@ -32,9 +32,16 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr v-for="planet in planets" :key="planet.url" class="table-row">
+        <tr
+          v-for="planet in planets"
+          :key="planet.url"
+          class="table-row"
+          data-testid="planet-row"
+        >
           <td class="table-td">
-            <div class="cell-primary">{{ planet.name }}</div>
+            <div class="cell-primary" data-testid="planet-name">
+              {{ planet.name }}
+            </div>
           </td>
           <td class="table-td">
             <div class="cell-secondary capitalize">{{ planet.climate }}</div>

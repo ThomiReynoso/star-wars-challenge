@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination" v-if="totalPages > 1">
+  <div class="pagination" v-if="totalPages > 1" data-testid="pagination">
     <div class="pagination-info">
       <span class="pagination-text">
         Showing {{ startItem }} to {{ endItem }} of {{ totalItems }}
@@ -15,6 +15,7 @@
         class="pagination-btn"
         :class="{ disabled: currentPage === 1 }"
         aria-label="Go to previous page"
+        data-testid="prev-page"
       >
         <svg
           class="pagination-icon"
@@ -41,6 +42,7 @@
           @click="goToPage(page)"
           class="page-btn"
           :class="{ active: currentPage === page }"
+          :data-testid="currentPage === page ? 'current-page' : 'page-btn'"
         >
           {{ page }}
         </button>
@@ -85,6 +87,7 @@
         class="pagination-btn"
         :class="{ disabled: currentPage === totalPages }"
         aria-label="Go to next page"
+        data-testid="next-page"
       >
         Next
         <svg

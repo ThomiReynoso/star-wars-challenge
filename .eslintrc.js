@@ -29,5 +29,14 @@ module.exports = {
         jest: true,
       },
     },
+    {
+      files: [
+        'playwright.config.ts',
+        '**/tests/e2e/**/*.{j,t}s?(x)',
+      ],
+      env: {
+        node: true,
+      },
+    },
   ],
 }
