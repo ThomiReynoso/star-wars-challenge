@@ -1,23 +1,9 @@
 <template>
   <div class="people-list">
-    <!-- Header with Search and Sort -->
+    <!-- Header -->
     <div class="list-header">
       <h2 class="list-title">Star Wars Characters</h2>
-      
-      <div class="list-controls">
-        <SearchInput
-          v-model="searchQuery"
-          placeholder="Search characters..."
-          class="search-input"
-        />
-        
-        <SortControls
-          :sort-by="search.sortBy"
-          :sort-order="search.sortOrder"
-          @update:sort-by="sortPeople($event, search.sortOrder)"
-          @update:sort-order="sortPeople(search.sortBy, $event)"
-        />
-      </div>
+      <p class="list-subtitle">Explore the heroes and villains from a galaxy far, far away</p>
     </div>
 
     <!-- Loading State -->
@@ -33,8 +19,22 @@
 
     <!-- Content -->
     <div v-else-if="people.length > 0">
+      <!-- Search Bar -->
+      <div class="search-section">
+        <SearchInput
+          v-model="searchQuery"
+          placeholder="Search characters..."
+          class="search-input"
+        />
+      </div>
+
       <!-- Table View -->
-      <PeopleTable :people="people" />
+      <PeopleTable 
+        :people="people"
+        :sort-by="search.sortBy"
+        :sort-order="search.sortOrder"
+        @sort="handleSort"
+      />
 
       <!-- Pagination -->
       <Pagination
@@ -61,7 +61,6 @@ import PeopleTable from './PeopleTable.vue'
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import ErrorMessage from '@/components/common/ErrorMessage.vue'
 import SearchInput from '@/components/common/SearchInput.vue'
-import SortControls from '@/components/common/SortControls.vue'
 import Pagination from '@/components/common/Pagination.vue'
 
 const searchQuery = ref('')
@@ -76,6 +75,10 @@ const {
   sortPeople,
   goToPage,
 } = usePeople()
+
+const handleSort = (field: 'name' | 'created', order: 'asc' | 'desc') => {
+  sortPeople(field, order)
+}
 
 watch(searchQuery, (newQuery) => {
   searchPeople(newQuery)
@@ -94,43 +97,29 @@ onMounted(() => {
 }
 
 .list-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  
-  @media (min-width: 640px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-  }
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .list-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: white;
+  margin-bottom: 0.5rem;
 }
 
-.list-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  
-  @media (min-width: 640px) {
-    flex-direction: row;
-    width: auto;
-    gap: 1rem;
-  }
+.list-subtitle {
+  font-size: 1rem;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+.search-section {
+  margin-bottom: 1.5rem;
 }
 
 .search-input {
   width: 100%;
-  
-  @media (min-width: 640px) {
-    width: 16rem;
-  }
 }
 
 
