@@ -42,6 +42,12 @@ export function usePeople() {
     return filteredAndSortedPeople.value.slice(start, end)
   })
 
+  const updatePagination = () => {
+    const totalFilteredItems = filteredAndSortedPeople.value.length
+    pagination.value.totalItems = totalFilteredItems
+    pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+  }
+
   const fetchPeople = async (page: number = 1, searchQuery?: string) => {
     // If we already have data and we're just changing pages, don't refetch
     if (allPeople.value.length > 0 && !searchQuery && page !== 1) {
@@ -63,10 +69,8 @@ export function usePeople() {
       // Store all data
       allPeople.value = response.results || []
       
-      // Update pagination info based on filtered data
-      const totalFilteredItems = filteredAndSortedPeople.value.length
-      pagination.value.totalItems = totalFilteredItems
-      pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+      // Update pagination info
+      updatePagination()
       pagination.value.currentPage = page
 
     } catch (error) {
@@ -82,14 +86,13 @@ export function usePeople() {
     pagination.value.currentPage = 1
     
     // Update pagination info based on filtered data
-    const totalFilteredItems = filteredAndSortedPeople.value.length
-    pagination.value.totalItems = totalFilteredItems
-    pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+    updatePagination()
   }, 300)
 
   const sortPeople = (field: 'name' | 'created', order: 'asc' | 'desc') => {
     search.value.sortBy = field
     search.value.sortOrder = order
+    updatePagination()
   }
 
   const loadMore = async () => {
@@ -98,10 +101,9 @@ export function usePeople() {
     }
   }
 
-  const goToPage = async (page: number) => {
+  const goToPage = (page: number) => {
     if (page >= 1 && page <= pagination.value.totalPages) {
       pagination.value.currentPage = page
-      people.value = paginatedPeople.value
     }
   }
 

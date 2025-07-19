@@ -45,29 +45,14 @@ class ApiService {
     const result = await this.fetchWithRetry<Person[]>(url)
     console.log('People API response:', result)
     
-    // Transform array response to paginated format
-    const itemsPerPage = 10
+    // Return all data for client-side pagination
     const allItems = Array.isArray(result) ? result : []
     
-    // Filter by search if provided
-    let filteredItems = allItems
-    if (search) {
-      const lowerSearch = search.toLowerCase()
-      filteredItems = allItems.filter(person => 
-        person.name && person.name.toLowerCase().includes(lowerSearch)
-      )
-    }
-    
-    // Paginate results
-    const startIndex = (page - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    const paginatedResults = filteredItems.slice(startIndex, endIndex)
-    
     return {
-      count: filteredItems.length,
-      next: endIndex < filteredItems.length ? `page=${page + 1}` : null,
-      previous: page > 1 ? `page=${page - 1}` : null,
-      results: paginatedResults
+      count: allItems.length,
+      next: null,
+      previous: null,
+      results: allItems
     }
   }
 
@@ -78,29 +63,14 @@ class ApiService {
     const result = await this.fetchWithRetry<Planet[]>(url)
     console.log('Planets API response:', result)
     
-    // Transform array response to paginated format
-    const itemsPerPage = 10
+    // Return all data for client-side pagination
     const allItems = Array.isArray(result) ? result : []
     
-    // Filter by search if provided
-    let filteredItems = allItems
-    if (search) {
-      const lowerSearch = search.toLowerCase()
-      filteredItems = allItems.filter(planet => 
-        planet.name && planet.name.toLowerCase().includes(lowerSearch)
-      )
-    }
-    
-    // Paginate results
-    const startIndex = (page - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    const paginatedResults = filteredItems.slice(startIndex, endIndex)
-    
     return {
-      count: filteredItems.length,
-      next: endIndex < filteredItems.length ? `page=${page + 1}` : null,
-      previous: page > 1 ? `page=${page - 1}` : null,
-      results: paginatedResults
+      count: allItems.length,
+      next: null,
+      previous: null,
+      results: allItems
     }
   }
 

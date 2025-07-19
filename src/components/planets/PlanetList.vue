@@ -36,18 +36,15 @@
       <!-- Table View -->
       <PlanetTable :planets="planets" />
 
-      <!-- Pagination Info -->
-      <div class="pagination-info">
-        <span class="pagination-text">
-          Showing {{ ((pagination.currentPage - 1) * pagination.itemsPerPage) + 1 }} to 
-          {{ Math.min(pagination.currentPage * pagination.itemsPerPage, pagination.totalItems) }} 
-          of {{ pagination.totalItems }} planets
-        </span>
-        
-        <div class="pagination-page">
-          <span>Page {{ pagination.currentPage }} of {{ pagination.totalPages }}</span>
-        </div>
-      </div>
+      <!-- Pagination -->
+      <Pagination
+        :current-page="pagination.currentPage"
+        :total-pages="pagination.totalPages"
+        :total-items="pagination.totalItems"
+        :items-per-page="pagination.itemsPerPage"
+        item-type="planets"
+        @page-change="goToPage"
+      />
     </div>
 
     <!-- Empty State -->
@@ -65,6 +62,7 @@ import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import ErrorMessage from '@/components/common/ErrorMessage.vue'
 import SearchInput from '@/components/common/SearchInput.vue'
 import SortControls from '@/components/common/SortControls.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 const searchQuery = ref('')
 
@@ -76,6 +74,7 @@ const {
   fetchPlanets,
   searchPlanets,
   sortPlanets,
+  goToPage,
 } = usePlanets()
 
 watch(searchQuery, (newQuery) => {
@@ -134,20 +133,6 @@ onMounted(() => {
   }
 }
 
-.pagination-info {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  color: #9CA3AF;
-}
-
-.pagination-page {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 .empty-state {
   text-align: center;
