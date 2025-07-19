@@ -25,14 +25,14 @@ defineProps<Props>()
   width: 3rem;
   height: 3rem;
   border: 2px solid transparent;
-  border-bottom: 2px solid #0066CC;
+  border-bottom: 2px solid #0066cc;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 .loading-message {
   margin-left: 0.75rem;
-  color: #D1D5DB;
+  color: #d1d5db;
 }
 
 @keyframes spin {

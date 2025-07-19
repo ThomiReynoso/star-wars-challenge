@@ -3,11 +3,11 @@ import type { SortOrder } from '@/types'
 /**
  * Debounce function to limit the rate of function execution
  */
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: never[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout
+  let timeout: number
   return (...args: Parameters<T>) => {
     clearTimeout(timeout)
     timeout = setTimeout(() => func(...args), wait)
@@ -23,11 +23,11 @@ export function sortBy<T>(
   order: SortOrder = 'asc'
 ): T[] {
   if (!array || !Array.isArray(array)) return []
-  
+
   return [...array].sort((a, b) => {
     const aValue = a[field]
     const bValue = b[field]
-    
+
     if (aValue < bValue) return order === 'asc' ? -1 : 1
     if (aValue > bValue) return order === 'asc' ? 1 : -1
     return 0
@@ -43,10 +43,10 @@ export function filterByName<T extends { name: string }>(
 ): T[] {
   if (!array || !Array.isArray(array)) return []
   if (!query) return array
-  
+
   const lowerQuery = query.toLowerCase()
-  return array.filter(item => 
-    item && item.name && item.name.toLowerCase().includes(lowerQuery)
+  return array.filter(
+    item => item && item.name && item.name.toLowerCase().includes(lowerQuery)
   )
 }
 
@@ -66,7 +66,7 @@ export function formatDate(dateString: string): string {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     })
   } catch {
     return 'Unknown'
@@ -76,6 +76,9 @@ export function formatDate(dateString: string): string {
 /**
  * Calculate total pages from total items and items per page
  */
-export function calculateTotalPages(totalItems: number, itemsPerPage: number): number {
+export function calculateTotalPages(
+  totalItems: number,
+  itemsPerPage: number
+): number {
   return Math.ceil(totalItems / itemsPerPage)
 }

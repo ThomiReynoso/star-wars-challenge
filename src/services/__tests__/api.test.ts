@@ -4,7 +4,7 @@ import type { Person, Planet } from '@/types'
 
 // Mock fetch globally
 const mockFetch = vi.fn()
-global.fetch = mockFetch
+Object.assign(globalThis, { fetch: mockFetch })
 
 describe('API Service', () => {
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('API Service', () => {
       const mockData = [{ name: 'Luke Skywalker' }]
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve(mockData)
+        json: () => Promise.resolve(mockData),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -30,8 +30,8 @@ describe('API Service', () => {
       expect(mockFetch).toHaveBeenCalledTimes(1)
       expect(mockFetch).toHaveBeenCalledWith('https://test.com/api', {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       })
       expect(result).toEqual(mockData)
     })
@@ -41,11 +41,11 @@ describe('API Service', () => {
       const mockErrorResponse = {
         ok: false,
         status: 500,
-        statusText: 'Internal Server Error'
+        statusText: 'Internal Server Error',
       }
       const mockSuccessResponse = {
         ok: true,
-        json: () => Promise.resolve(mockData)
+        json: () => Promise.resolve(mockData),
       }
 
       mockFetch
@@ -62,14 +62,14 @@ describe('API Service', () => {
       const mockErrorResponse = {
         ok: false,
         status: 500,
-        statusText: 'Internal Server Error'
+        statusText: 'Internal Server Error',
       }
 
       mockFetch.mockResolvedValue(mockErrorResponse)
 
-      await expect(apiService.fetchWithRetry('https://test.com/api')).rejects.toThrow(
-        'HTTP error! status: 500'
-      )
+      await expect(
+        apiService.fetchWithRetry('https://test.com/api')
+      ).rejects.toThrow('HTTP error! status: 500')
 
       expect(mockFetch).toHaveBeenCalledTimes(4) // Initial call + 3 retries
     })
@@ -79,7 +79,7 @@ describe('API Service', () => {
       const mockData = [{ name: 'Luke Skywalker' }]
       const mockSuccessResponse = {
         ok: true,
-        json: () => Promise.resolve(mockData)
+        json: () => Promise.resolve(mockData),
       }
 
       mockFetch
@@ -97,9 +97,9 @@ describe('API Service', () => {
 
       mockFetch.mockRejectedValue(networkError)
 
-      await expect(apiService.fetchWithRetry('https://test.com/api')).rejects.toThrow(
-        'Network error'
-      )
+      await expect(
+        apiService.fetchWithRetry('https://test.com/api')
+      ).rejects.toThrow('Network error')
 
       expect(mockFetch).toHaveBeenCalledTimes(4)
     })
@@ -124,13 +124,13 @@ describe('API Service', () => {
           starships: [],
           created: '2014-12-09T13:50:51.644000Z',
           edited: '2014-12-20T21:17:56.891000Z',
-          url: 'https://swapi.info/api/people/1/'
-        }
+          url: 'https://swapi.info/api/people/1/',
+        },
       ]
 
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve(mockPeopleData)
+        json: () => Promise.resolve(mockPeopleData),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -139,21 +139,21 @@ describe('API Service', () => {
 
       expect(mockFetch).toHaveBeenCalledWith('https://swapi.info/api/people', {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       })
       expect(result).toEqual({
         count: 1,
         next: null,
         previous: null,
-        results: mockPeopleData
+        results: mockPeopleData,
       })
     })
 
     it('should handle empty people response', async () => {
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve(null)
+        json: () => Promise.resolve(null),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -164,14 +164,14 @@ describe('API Service', () => {
         count: 0,
         next: null,
         previous: null,
-        results: []
+        results: [],
       })
     })
 
     it('should handle non-array people response', async () => {
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve({ invalid: 'data' })
+        json: () => Promise.resolve({ invalid: 'data' }),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -182,7 +182,7 @@ describe('API Service', () => {
         count: 0,
         next: null,
         previous: null,
-        results: []
+        results: [],
       })
     })
   })
@@ -204,13 +204,13 @@ describe('API Service', () => {
           films: [],
           created: '2014-12-09T13:50:49.641000Z',
           edited: '2014-12-20T20:58:18.411000Z',
-          url: 'https://swapi.info/api/planets/1/'
-        }
+          url: 'https://swapi.info/api/planets/1/',
+        },
       ]
 
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve(mockPlanetsData)
+        json: () => Promise.resolve(mockPlanetsData),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -219,21 +219,21 @@ describe('API Service', () => {
 
       expect(mockFetch).toHaveBeenCalledWith('https://swapi.info/api/planets', {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       })
       expect(result).toEqual({
         count: 1,
         next: null,
         previous: null,
-        results: mockPlanetsData
+        results: mockPlanetsData,
       })
     })
 
     it('should handle empty planets response', async () => {
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve([])
+        json: () => Promise.resolve([]),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
@@ -244,7 +244,7 @@ describe('API Service', () => {
         count: 0,
         next: null,
         previous: null,
-        results: []
+        results: [],
       })
     })
   })
@@ -267,23 +267,26 @@ describe('API Service', () => {
         starships: [],
         created: '2014-12-09T13:50:51.644000Z',
         edited: '2014-12-20T21:17:56.891000Z',
-        url: 'https://swapi.info/api/people/1/'
+        url: 'https://swapi.info/api/people/1/',
       }
 
       const mockResponse = {
         ok: true,
-        json: () => Promise.resolve(mockPerson)
+        json: () => Promise.resolve(mockPerson),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
 
       const result = await apiService.getPersonById('1')
 
-      expect(mockFetch).toHaveBeenCalledWith('https://swapi.info/api/people/1/', {
-        headers: {
-          'Content-Type': 'application/json'
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://swapi.info/api/people/1/',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      })
+      )
       expect(result).toEqual(mockPerson)
     })
 
@@ -291,7 +294,7 @@ describe('API Service', () => {
       const mockErrorResponse = {
         ok: false,
         status: 404,
-        statusText: 'Not Found'
+        statusText: 'Not Found',
       }
 
       mockFetch.mockResolvedValue(mockErrorResponse)
@@ -300,11 +303,14 @@ describe('API Service', () => {
         'HTTP error! status: 404'
       )
 
-      expect(mockFetch).toHaveBeenCalledWith('https://swapi.info/api/people/999/', {
-        headers: {
-          'Content-Type': 'application/json'
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://swapi.info/api/people/999/',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      })
+      )
     })
   })
 
@@ -312,25 +318,27 @@ describe('API Service', () => {
     it('should handle JSON parsing errors', async () => {
       const mockResponse = {
         ok: true,
-        json: () => Promise.reject(new Error('Invalid JSON'))
+        json: () => Promise.reject(new Error('Invalid JSON')),
       }
 
       mockFetch.mockResolvedValueOnce(mockResponse)
 
-      await expect(apiService.fetchWithRetry('https://test.com/api')).rejects.toThrow()
+      await expect(
+        apiService.fetchWithRetry('https://test.com/api')
+      ).rejects.toThrow()
     })
 
     it('should wait between retries', async () => {
       const mockErrorResponse = {
         ok: false,
         status: 500,
-        statusText: 'Internal Server Error'
+        statusText: 'Internal Server Error',
       }
 
       mockFetch.mockResolvedValue(mockErrorResponse)
 
       const startTime = Date.now()
-      
+
       try {
         await apiService.fetchWithRetry('https://test.com/api')
       } catch (error) {

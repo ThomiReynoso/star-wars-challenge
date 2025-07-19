@@ -1,17 +1,22 @@
 <template>
   <div class="sort-controls">
     <span class="sort-label">Sort by:</span>
-    
+
     <select
       :value="sortBy"
-      @change="$emit('update:sortBy', ($event.target as HTMLSelectElement).value as 'name' | 'created')"
+      @change="
+        $emit(
+          'update:sortBy',
+          ($event.target as HTMLSelectElement).value as 'name' | 'created'
+        )
+      "
       class="input-field sort-select"
       aria-label="Sort field"
     >
       <option value="name">Name</option>
       <option value="created">Date Created</option>
     </select>
-    
+
     <button
       @click="toggleSortOrder"
       class="btn btn-secondary sort-button"
@@ -52,7 +57,7 @@ const toggleSortOrder = () => {
 }
 
 .sort-label {
-  color: #D1D5DB;
+  color: #d1d5db;
   font-size: 0.875rem;
 }
 

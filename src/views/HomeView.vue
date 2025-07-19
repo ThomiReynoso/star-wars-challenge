@@ -4,8 +4,8 @@
       <!-- Hero Section -->
       <div class="hero">
         <h1 class="hero-title">
-          Welcome to the 
-          <span class="hero-highlight">Star Wars</span> 
+          Welcome to the
+          <span class="hero-highlight">Star Wars</span>
           Universe
         </h1>
         <p class="hero-subtitle">
@@ -19,7 +19,8 @@
           <div class="nav-card-icon">👥</div>
           <h2 class="nav-card-title">Characters</h2>
           <p class="nav-card-description">
-            Discover heroes, villains, and everyone in between from the Star Wars saga
+            Discover heroes, villains, and everyone in between from the Star
+            Wars saga
           </p>
           <div class="nav-card-cta">Explore Characters →</div>
         </router-link>
@@ -41,7 +42,8 @@
           <div class="feature">
             <div class="feature-title">🔍 Search & Filter</div>
             <p class="feature-description">
-              Find specific characters and planets with our powerful search functionality
+              Find specific characters and planets with our powerful search
+              functionality
             </p>
           </div>
           <div class="feature">
@@ -89,12 +91,12 @@
 }
 
 .hero-highlight {
-  color: #0066CC;
+  color: #0066cc;
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: #D1D5DB;
+  color: #d1d5db;
   margin-bottom: 2rem;
 }
 
@@ -103,26 +105,26 @@
   grid-template-columns: 1fr;
   gap: 2rem;
   margin-bottom: 3rem;
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .nav-card {
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-radius: 0.5rem;
   padding: 1.5rem;
   border: 1px solid #374151;
   text-decoration: none;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background-color: #374151;
     transform: scale(1.05);
-    
+
     .nav-card-title {
-      color: #0066CC;
+      color: #0066cc;
     }
   }
 }
@@ -141,17 +143,17 @@
 }
 
 .nav-card-description {
-  color: #D1D5DB;
+  color: #d1d5db;
   margin-bottom: 1rem;
 }
 
 .nav-card-cta {
-  color: #0066CC;
+  color: #0066cc;
   font-weight: 600;
 }
 
 .features {
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-radius: 0.5rem;
   padding: 2rem;
 }
@@ -168,20 +170,20 @@
   grid-template-columns: 1fr;
   gap: 1.5rem;
   text-align: left;
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .feature-title {
-  color: #0066CC;
+  color: #0066cc;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .feature-description {
-  color: #D1D5DB;
+  color: #d1d5db;
   font-size: 0.875rem;
 }
 </style>

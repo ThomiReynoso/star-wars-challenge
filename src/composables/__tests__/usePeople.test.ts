@@ -6,8 +6,8 @@ import type { Person } from '@/types'
 // Mock the API service
 vi.mock('@/services/api', () => ({
   apiService: {
-    getPeople: vi.fn()
-  }
+    getPeople: vi.fn(),
+  },
 }))
 
 const mockPeople: Person[] = [
@@ -27,7 +27,7 @@ const mockPeople: Person[] = [
     starships: [],
     created: '2014-12-09T13:50:51.644000Z',
     edited: '2014-12-20T21:17:56.891000Z',
-    url: 'https://swapi.info/api/people/1/'
+    url: 'https://swapi.info/api/people/1/',
   },
   {
     name: 'C-3PO',
@@ -45,7 +45,7 @@ const mockPeople: Person[] = [
     starships: [],
     created: '2014-12-10T15:10:51.357000Z',
     edited: '2014-12-20T21:17:50.309000Z',
-    url: 'https://swapi.info/api/people/2/'
+    url: 'https://swapi.info/api/people/2/',
   },
   {
     name: 'R2-D2',
@@ -63,8 +63,8 @@ const mockPeople: Person[] = [
     starships: [],
     created: '2014-12-10T15:11:50.376000Z',
     edited: '2014-12-20T21:17:50.311000Z',
-    url: 'https://swapi.info/api/people/3/'
-  }
+    url: 'https://swapi.info/api/people/3/',
+  },
 ]
 
 describe('usePeople', () => {
@@ -92,7 +92,7 @@ describe('usePeople', () => {
       count: mockPeople.length,
       next: null,
       previous: null,
-      results: mockPeople
+      results: mockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -111,7 +111,9 @@ describe('usePeople', () => {
 
   it('should handle API errors', async () => {
     const errorMessage = 'Failed to fetch people'
-    vi.mocked(apiService.getPeople).mockRejectedValueOnce(new Error(errorMessage))
+    vi.mocked(apiService.getPeople).mockRejectedValueOnce(
+      new Error(errorMessage)
+    )
 
     const { fetchPeople, loading } = usePeople()
 
@@ -126,7 +128,7 @@ describe('usePeople', () => {
       count: mockPeople.length,
       next: null,
       previous: null,
-      results: mockPeople
+      results: mockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -139,10 +141,10 @@ describe('usePeople', () => {
 
     // Then search for "Luke"
     searchPeople('Luke')
-    
+
     // Wait for debounce to complete
     await new Promise(resolve => setTimeout(resolve, 350))
-    
+
     // Should only return Luke Skywalker
     expect(people.value).toHaveLength(1)
     expect(people.value[0].name).toBe('Luke Skywalker')
@@ -153,7 +155,7 @@ describe('usePeople', () => {
       count: mockPeople.length,
       next: null,
       previous: null,
-      results: mockPeople
+      results: mockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -176,14 +178,14 @@ describe('usePeople', () => {
     const largeMockPeople = Array.from({ length: 25 }, (_, i) => ({
       ...mockPeople[0],
       name: `Person ${i + 1}`,
-      url: `https://swapi.info/api/people/${i + 1}/`
+      url: `https://swapi.info/api/people/${i + 1}/`,
     }))
 
     const mockResponse = {
       count: largeMockPeople.length,
       next: null,
       previous: null,
-      results: largeMockPeople
+      results: largeMockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -213,7 +215,7 @@ describe('usePeople', () => {
       count: mockPeople.length,
       next: null,
       previous: null,
-      results: mockPeople
+      results: mockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -237,14 +239,14 @@ describe('usePeople', () => {
     const largeMockPeople = Array.from({ length: 25 }, (_, i) => ({
       ...mockPeople[0],
       name: `Person ${i + 1}`,
-      url: `https://swapi.info/api/people/${i + 1}/`
+      url: `https://swapi.info/api/people/${i + 1}/`,
     }))
 
     const mockResponse = {
       count: largeMockPeople.length,
       next: null,
       previous: null,
-      results: largeMockPeople
+      results: largeMockPeople,
     }
 
     vi.mocked(apiService.getPeople).mockResolvedValueOnce(mockResponse)
@@ -259,10 +261,10 @@ describe('usePeople', () => {
 
     // Search should reset to page 1
     searchPeople('Person 1')
-    
+
     // Wait for debounce to complete
     await new Promise(resolve => setTimeout(resolve, 350))
-    
+
     expect(pagination.value.currentPage).toBe(1)
   })
 })

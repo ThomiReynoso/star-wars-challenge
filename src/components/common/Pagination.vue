@@ -2,10 +2,11 @@
   <div class="pagination" v-if="totalPages > 1">
     <div class="pagination-info">
       <span class="pagination-text">
-        Showing {{ startItem }} to {{ endItem }} of {{ totalItems }} {{ itemType }}
+        Showing {{ startItem }} to {{ endItem }} of {{ totalItems }}
+        {{ itemType }}
       </span>
     </div>
-    
+
     <div class="pagination-controls">
       <!-- Previous Button -->
       <button
@@ -15,8 +16,18 @@
         :class="{ disabled: currentPage === 1 }"
         aria-label="Go to previous page"
       >
-        <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        <svg
+          class="pagination-icon"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          ></path>
         </svg>
         Previous
       </button>
@@ -33,10 +44,12 @@
         >
           {{ page }}
         </button>
-        
+
         <!-- Start ellipsis -->
-        <span v-if="paginationConfig.showStartEllipsis" class="ellipsis">...</span>
-        
+        <span v-if="paginationConfig.showStartEllipsis" class="ellipsis"
+          >...</span
+        >
+
         <!-- Middle pages (around current page) -->
         <button
           v-for="page in paginationConfig.middlePages"
@@ -47,10 +60,12 @@
         >
           {{ page }}
         </button>
-        
+
         <!-- End ellipsis -->
-        <span v-if="paginationConfig.showEndEllipsis" class="ellipsis">...</span>
-        
+        <span v-if="paginationConfig.showEndEllipsis" class="ellipsis"
+          >...</span
+        >
+
         <!-- End pages (last 2 pages) -->
         <button
           v-for="page in paginationConfig.endPages"
@@ -72,8 +87,18 @@
         aria-label="Go to next page"
       >
         Next
-        <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        <svg
+          class="pagination-icon"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
         </svg>
       </button>
     </div>
@@ -96,7 +121,7 @@ interface Emits {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  itemType: 'items'
+  itemType: 'items',
 })
 
 const emit = defineEmits<Emits>()
@@ -112,7 +137,7 @@ const endItem = computed(() => {
 const paginationConfig = computed(() => {
   const totalPages = props.totalPages
   const currentPage = props.currentPage
-  
+
   // If 7 or fewer pages, show all
   if (totalPages <= 7) {
     return {
@@ -120,16 +145,16 @@ const paginationConfig = computed(() => {
       showStartEllipsis: false,
       middlePages: [],
       showEndEllipsis: false,
-      endPages: []
+      endPages: [],
     }
   }
-  
+
   let startPages: number[] = []
   let middlePages: number[] = []
   let endPages: number[] = []
   let showStartEllipsis = false
   let showEndEllipsis = false
-  
+
   if (currentPage <= 4) {
     // Current page is near the start: show 1,2,3,4,5,6 ... last
     startPages = [1, 2, 3, 4, 5, 6]
@@ -148,13 +173,13 @@ const paginationConfig = computed(() => {
     showEndEllipsis = true
     endPages = [totalPages]
   }
-  
+
   return {
     startPages,
     showStartEllipsis,
     middlePages,
-    showEndEllipsis, 
-    endPages
+    showEndEllipsis,
+    endPages,
   }
 })
 
@@ -171,7 +196,7 @@ const goToPage = (page: number) => {
   flex-direction: column;
   gap: 1rem;
   margin-top: 1.5rem;
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
@@ -182,7 +207,7 @@ const goToPage = (page: number) => {
 .pagination-info {
   .pagination-text {
     font-size: 0.875rem;
-    color: #9CA3AF;
+    color: #9ca3af;
   }
 }
 
@@ -197,7 +222,7 @@ const goToPage = (page: number) => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: #4B5563;
+  background-color: #4b5563;
   color: white;
   border: none;
   border-radius: 0.375rem;
@@ -205,11 +230,11 @@ const goToPage = (page: number) => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover:not(.disabled) {
     background-color: #374151;
   }
-  
+
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -233,7 +258,7 @@ const goToPage = (page: number) => {
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  background-color: #4B5563;
+  background-color: #4b5563;
   color: white;
   border: none;
   border-radius: 0.375rem;
@@ -241,13 +266,13 @@ const goToPage = (page: number) => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background-color: #374151;
   }
-  
+
   &.active {
-    background-color: #0066CC;
+    background-color: #0066cc;
     color: white;
   }
 }
@@ -258,7 +283,7 @@ const goToPage = (page: number) => {
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   font-weight: 500;
 }
 </style>

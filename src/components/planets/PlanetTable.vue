@@ -32,11 +32,7 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr
-          v-for="planet in planets"
-          :key="planet.url"
-          class="table-row"
-        >
+        <tr v-for="planet in planets" :key="planet.url" class="table-row">
           <td class="table-td">
             <div class="cell-primary">{{ planet.name }}</div>
           </td>
@@ -47,7 +43,9 @@
             <div class="cell-secondary capitalize">{{ planet.terrain }}</div>
           </td>
           <td class="table-td">
-            <div class="cell-secondary">{{ formatPopulation(planet.population) }}</div>
+            <div class="cell-secondary">
+              {{ formatPopulation(planet.population) }}
+            </div>
           </td>
           <td class="table-td">
             <div class="cell-secondary">{{ planet.diameter }}km</div>
@@ -80,20 +78,20 @@ const emit = defineEmits<Emits>()
 
 const sort = (field: 'name' | 'created') => {
   let newOrder: 'asc' | 'desc' = 'asc'
-  
+
   if (props.sortBy === field) {
     newOrder = props.sortOrder === 'asc' ? 'desc' : 'asc'
   }
-  
+
   emit('sort', field, newOrder)
 }
 
 const formatPopulation = (population: string): string => {
   if (population === 'unknown') return 'Unknown'
-  
+
   const num = parseInt(population)
   if (isNaN(num)) return population
-  
+
   if (num >= 1000000000) {
     return `${(num / 1000000000).toFixed(1)}B`
   } else if (num >= 1000000) {
@@ -101,7 +99,7 @@ const formatPopulation = (population: string): string => {
   } else if (num >= 1000) {
     return `${(num / 1000).toFixed(1)}K`
   }
-  
+
   return num.toLocaleString()
 }
 </script>
@@ -113,7 +111,7 @@ const formatPopulation = (population: string): string => {
 
 .data-table {
   min-width: 100%;
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -127,15 +125,15 @@ const formatPopulation = (population: string): string => {
   text-align: left;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #D1D5DB;
+  color: #d1d5db;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  
+
   &.sortable {
     cursor: pointer;
     user-select: none;
     transition: background-color 0.2s ease;
-    
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.05);
     }
@@ -158,10 +156,10 @@ const formatPopulation = (population: string): string => {
 .sort-icon {
   font-size: 0.875rem;
   font-weight: bold;
-  color: #0066CC;
-  
+  color: #0066cc;
+
   &.inactive {
-    color: #6B7280;
+    color: #6b7280;
     opacity: 0.5;
   }
 }
@@ -174,7 +172,7 @@ const formatPopulation = (population: string): string => {
 
 .table-row {
   transition: background-color 0.2s ease;
-  
+
   &:hover {
     background-color: rgba(55, 65, 81, 0.8);
   }
@@ -193,8 +191,8 @@ const formatPopulation = (population: string): string => {
 
 .cell-secondary {
   font-size: 0.875rem;
-  color: #D1D5DB;
-  
+  color: #d1d5db;
+
   &.capitalize {
     text-transform: capitalize;
   }
