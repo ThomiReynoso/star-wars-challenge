@@ -42,6 +42,12 @@ export function usePlanets() {
     return filteredAndSortedPlanets.value.slice(start, end)
   })
 
+  const updatePagination = () => {
+    const totalFilteredItems = filteredAndSortedPlanets.value.length
+    pagination.value.totalItems = totalFilteredItems
+    pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+  }
+
   const fetchPlanets = async (page: number = 1, searchQuery?: string) => {
     // If we already have data and we're just changing pages, don't refetch
     if (allPlanets.value.length > 0 && !searchQuery && page !== 1) {
@@ -63,10 +69,8 @@ export function usePlanets() {
       // Store all data
       allPlanets.value = response.results || []
       
-      // Update pagination info based on filtered data
-      const totalFilteredItems = filteredAndSortedPlanets.value.length
-      pagination.value.totalItems = totalFilteredItems
-      pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+      // Update pagination info
+      updatePagination()
       pagination.value.currentPage = page
 
     } catch (error) {
@@ -82,14 +86,13 @@ export function usePlanets() {
     pagination.value.currentPage = 1
     
     // Update pagination info based on filtered data
-    const totalFilteredItems = filteredAndSortedPlanets.value.length
-    pagination.value.totalItems = totalFilteredItems
-    pagination.value.totalPages = Math.ceil(totalFilteredItems / pagination.value.itemsPerPage)
+    updatePagination()
   }, 300)
 
   const sortPlanets = (field: 'name' | 'created', order: 'asc' | 'desc') => {
     search.value.sortBy = field
     search.value.sortOrder = order
+    updatePagination()
   }
 
   const loadMore = async () => {
@@ -98,10 +101,9 @@ export function usePlanets() {
     }
   }
 
-  const goToPage = async (page: number) => {
+  const goToPage = (page: number) => {
     if (page >= 1 && page <= pagination.value.totalPages) {
       pagination.value.currentPage = page
-      planets.value = paginatedPlanets.value
     }
   }
 

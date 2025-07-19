@@ -1,23 +1,9 @@
 <template>
   <div class="planets-list">
-    <!-- Header with Search and Sort -->
+    <!-- Header -->
     <div class="list-header">
       <h2 class="list-title">Star Wars Planets</h2>
-      
-      <div class="list-controls">
-        <SearchInput
-          v-model="searchQuery"
-          placeholder="Search planets..."
-          class="search-input"
-        />
-        
-        <SortControls
-          :sort-by="search.sortBy"
-          :sort-order="search.sortOrder"
-          @update:sort-by="sortPlanets($event, search.sortOrder)"
-          @update:sort-order="sortPlanets(search.sortBy, $event)"
-        />
-      </div>
+      <p class="list-subtitle">Discover worlds across the galaxy with unique climates and terrains</p>
     </div>
 
     <!-- Loading State -->
@@ -32,27 +18,55 @@
     />
 
     <!-- Content -->
-    <div v-else-if="planets.length > 0">
-      <!-- Table View -->
-      <PlanetTable :planets="planets" />
-
-      <!-- Pagination Info -->
-      <div class="pagination-info">
-        <span class="pagination-text">
-          Showing {{ ((pagination.currentPage - 1) * pagination.itemsPerPage) + 1 }} to 
-          {{ Math.min(pagination.currentPage * pagination.itemsPerPage, pagination.totalItems) }} 
-          of {{ pagination.totalItems }} planets
-        </span>
-        
-        <div class="pagination-page">
-          <span>Page {{ pagination.currentPage }} of {{ pagination.totalPages }}</span>
-        </div>
+    <div v-else>
+      <!-- Search Bar -->
+      <div class="search-section">
+        <SearchInput
+          v-model="searchQuery"
+          placeholder="Search planets..."
+          class="search-input"
+        />
       </div>
-    </div>
 
-    <!-- Empty State -->
-    <div v-else class="empty-state">
-      <p class="empty-message">No planets found.</p>
+      <!-- Table and Pagination (when there are results) -->
+      <div v-if="planets.length > 0">
+        <!-- Table View -->
+        <PlanetTable 
+          :planets="planets"
+          :sort-by="search.sortBy"
+          :sort-order="search.sortOrder"
+          @sort="handleSort"
+        />
+
+        <!-- Pagination -->
+        <Pagination
+          :current-page="pagination.currentPage"
+          :total-pages="pagination.totalPages"
+          :total-items="pagination.totalItems"
+          :items-per-page="pagination.itemsPerPage"
+          item-type="planets"
+          @page-change="goToPage"
+        />
+      </div>
+
+      <!-- Empty State with Search -->
+      <div v-else-if="searchQuery.trim()" class="search-empty-state">
+        <div class="empty-icon">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="empty-title">No planets found</h3>
+        <p class="empty-subtitle">Try adjusting your search terms</p>
+        <button @click="clearSearch" class="clear-search-btn">
+          Clear search
+        </button>
+      </div>
+
+      <!-- Default Empty State -->
+      <div v-else class="empty-state">
+        <p class="empty-message">No planets found.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -64,7 +78,7 @@ import PlanetTable from './PlanetTable.vue'
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import ErrorMessage from '@/components/common/ErrorMessage.vue'
 import SearchInput from '@/components/common/SearchInput.vue'
-import SortControls from '@/components/common/SortControls.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 const searchQuery = ref('')
 
@@ -76,7 +90,16 @@ const {
   fetchPlanets,
   searchPlanets,
   sortPlanets,
+  goToPage,
 } = usePlanets()
+
+const handleSort = (field: 'name' | 'created', order: 'asc' | 'desc') => {
+  sortPlanets(field, order)
+}
+
+const clearSearch = () => {
+  searchQuery.value = ''
+}
 
 watch(searchQuery, (newQuery) => {
   searchPlanets(newQuery)
@@ -95,58 +118,84 @@ onMounted(() => {
 }
 
 .list-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  
-  @media (min-width: 640px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-  }
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .list-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: white;
+  margin-bottom: 0.5rem;
 }
 
-.list-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  
-  @media (min-width: 640px) {
-    flex-direction: row;
-    width: auto;
-    gap: 1rem;
-  }
+.list-subtitle {
+  font-size: 1rem;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+.search-section {
+  margin-bottom: 1.5rem;
 }
 
 .search-input {
   width: 100%;
+}
+
+
+.search-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 1.5rem;
   
-  @media (min-width: 640px) {
-    width: 16rem;
+  .icon {
+    height: 4rem;
+    width: 4rem;
+    color: #6B7280;
+    stroke-width: 1;
   }
 }
 
-.pagination-info {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  color: #9CA3AF;
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.5rem 0;
 }
 
-.pagination-page {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.empty-subtitle {
+  font-size: 1rem;
+  color: #9CA3AF;
+  margin: 0 0 2rem 0;
+}
+
+.clear-search-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .empty-state {

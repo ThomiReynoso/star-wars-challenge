@@ -37,10 +37,12 @@ defineEmits<Emits>()
 
 .search-input {
   width: 100%;
-  padding-left: 2.5rem;
+  padding-left: 2.75rem;
   padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
 }
 
 .search-icon {
@@ -48,15 +50,15 @@ defineEmits<Emits>()
   top: 0;
   left: 0;
   bottom: 0;
-  padding-left: 0.75rem;
+  padding-left: 0.875rem;
   display: flex;
   align-items: center;
   pointer-events: none;
 }
 
 .icon {
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 1.375rem;
+  width: 1.375rem;
   color: #9CA3AF;
 }
 </style>
