@@ -23,23 +23,10 @@
 
       <!-- Page Numbers -->
       <div class="page-numbers">
-        <!-- First page -->
+        <!-- Start pages (1, 2, 3) -->
         <button
-          v-if="showFirstPage"
-          @click="goToPage(1)"
-          class="page-btn"
-          :class="{ active: currentPage === 1 }"
-        >
-          1
-        </button>
-        
-        <!-- First ellipsis -->
-        <span v-if="showFirstEllipsis" class="ellipsis">...</span>
-        
-        <!-- Visible page range -->
-        <button
-          v-for="page in visiblePages"
-          :key="page"
+          v-for="page in paginationConfig.startPages"
+          :key="`start-${page}`"
           @click="goToPage(page)"
           class="page-btn"
           :class="{ active: currentPage === page }"
@@ -47,17 +34,32 @@
           {{ page }}
         </button>
         
-        <!-- Last ellipsis -->
-        <span v-if="showLastEllipsis" class="ellipsis">...</span>
+        <!-- Start ellipsis -->
+        <span v-if="paginationConfig.showStartEllipsis" class="ellipsis">...</span>
         
-        <!-- Last page -->
+        <!-- Middle pages (around current page) -->
         <button
-          v-if="showLastPage"
-          @click="goToPage(totalPages)"
+          v-for="page in paginationConfig.middlePages"
+          :key="`middle-${page}`"
+          @click="goToPage(page)"
           class="page-btn"
-          :class="{ active: currentPage === totalPages }"
+          :class="{ active: currentPage === page }"
         >
-          {{ totalPages }}
+          {{ page }}
+        </button>
+        
+        <!-- End ellipsis -->
+        <span v-if="paginationConfig.showEndEllipsis" class="ellipsis">...</span>
+        
+        <!-- End pages (last 2 pages) -->
+        <button
+          v-for="page in paginationConfig.endPages"
+          :key="`end-${page}`"
+          @click="goToPage(page)"
+          class="page-btn"
+          :class="{ active: currentPage === page }"
+        >
+          {{ page }}
         </button>
       </div>
 
@@ -107,55 +109,53 @@ const endItem = computed(() => {
   return Math.min(props.currentPage * props.itemsPerPage, props.totalItems)
 })
 
-const visiblePages = computed(() => {
-  const delta = 2 // Number of pages to show around current page
-  const range: number[] = []
-  const rangeWithDots: number[] = []
-
-  for (let i = Math.max(2, props.currentPage - delta); 
-       i <= Math.min(props.totalPages - 1, props.currentPage + delta); 
-       i++) {
-    range.push(i)
-  }
-
-  if (props.currentPage - delta > 2) {
-    rangeWithDots.push(2)
-  } else {
-    for (let i = 2; i < Math.max(2, props.currentPage - delta); i++) {
-      rangeWithDots.push(i)
+const paginationConfig = computed(() => {
+  const totalPages = props.totalPages
+  const currentPage = props.currentPage
+  
+  // If 7 or fewer pages, show all
+  if (totalPages <= 7) {
+    return {
+      startPages: Array.from({ length: totalPages }, (_, i) => i + 1),
+      showStartEllipsis: false,
+      middlePages: [],
+      showEndEllipsis: false,
+      endPages: []
     }
   }
-
-  rangeWithDots.push(...range)
-
-  if (props.currentPage + delta < props.totalPages - 1) {
-    rangeWithDots.push(props.totalPages - 1)
+  
+  let startPages: number[] = []
+  let middlePages: number[] = []
+  let endPages: number[] = []
+  let showStartEllipsis = false
+  let showEndEllipsis = false
+  
+  if (currentPage <= 4) {
+    // Current page is near the start: show 1,2,3,4,5,6 ... last
+    startPages = [1, 2, 3, 4, 5, 6]
+    showEndEllipsis = true
+    endPages = [totalPages]
+  } else if (currentPage >= totalPages - 2) {
+    // Current page is near the end: show 1,2,3,4 ... last-2,last-1,last
+    startPages = [1, 2, 3, 4]
+    showStartEllipsis = true
+    endPages = [totalPages - 2, totalPages - 1, totalPages]
   } else {
-    for (let i = Math.min(props.totalPages - 1, props.currentPage + delta) + 1; 
-         i < props.totalPages; 
-         i++) {
-      rangeWithDots.push(i)
-    }
+    // Current page is in the middle: show 1,2,3,4 ... current-1,current,current+1 ... last
+    startPages = [1, 2, 3, 4]
+    showStartEllipsis = true
+    middlePages = [currentPage - 1, currentPage, currentPage + 1]
+    showEndEllipsis = true
+    endPages = [totalPages]
   }
-
-  return rangeWithDots
-})
-
-const showFirstPage = computed(() => {
-  return !visiblePages.value.includes(1) && props.totalPages > 1
-})
-
-const showLastPage = computed(() => {
-  return !visiblePages.value.includes(props.totalPages) && props.totalPages > 1
-})
-
-const showFirstEllipsis = computed(() => {
-  return visiblePages.value.length > 0 && visiblePages.value[0] > 2
-})
-
-const showLastEllipsis = computed(() => {
-  return visiblePages.value.length > 0 && 
-         visiblePages.value[visiblePages.value.length - 1] < props.totalPages - 1
+  
+  return {
+    startPages,
+    showStartEllipsis,
+    middlePages,
+    showEndEllipsis, 
+    endPages
+  }
 })
 
 const goToPage = (page: number) => {
