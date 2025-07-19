@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Pagination from '../Pagination.vue'
 
@@ -8,12 +8,12 @@ describe('Pagination', () => {
     totalPages: 5,
     totalItems: 50,
     itemsPerPage: 10,
-    itemType: 'items'
+    itemType: 'items',
   }
 
   it('should render pagination info correctly', () => {
     const wrapper = mount(Pagination, {
-      props: defaultProps
+      props: defaultProps,
     })
 
     expect(wrapper.text()).toContain('Showing 1 to 10 of 50 items')
@@ -23,8 +23,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        totalPages: 1
-      }
+        totalPages: 1,
+      },
     })
 
     expect(wrapper.find('.pagination').exists()).toBe(false)
@@ -32,7 +32,7 @@ describe('Pagination', () => {
 
   it('should render previous and next buttons', () => {
     const wrapper = mount(Pagination, {
-      props: defaultProps
+      props: defaultProps,
     })
 
     const prevButton = wrapper.find('button[aria-label="Go to previous page"]')
@@ -48,8 +48,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 1
-      }
+        currentPage: 1,
+      },
     })
 
     const prevButton = wrapper.find('button[aria-label="Go to previous page"]')
@@ -62,8 +62,8 @@ describe('Pagination', () => {
       props: {
         ...defaultProps,
         currentPage: 5,
-        totalPages: 5
-      }
+        totalPages: 5,
+      },
     })
 
     const nextButton = wrapper.find('button[aria-label="Go to next page"]')
@@ -75,8 +75,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 3
-      }
+        currentPage: 3,
+      },
     })
 
     const prevButton = wrapper.find('button[aria-label="Go to previous page"]')
@@ -90,8 +90,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 3
-      }
+        currentPage: 3,
+      },
     })
 
     const nextButton = wrapper.find('button[aria-label="Go to next page"]')
@@ -105,8 +105,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 1
-      }
+        currentPage: 1,
+      },
     })
 
     const prevButton = wrapper.find('button[aria-label="Go to previous page"]')
@@ -120,8 +120,8 @@ describe('Pagination', () => {
       props: {
         ...defaultProps,
         currentPage: 5,
-        totalPages: 5
-      }
+        totalPages: 5,
+      },
     })
 
     const nextButton = wrapper.find('button[aria-label="Go to next page"]')
@@ -134,8 +134,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        totalPages: 5
-      }
+        totalPages: 5,
+      },
     })
 
     const pageButtons = wrapper.findAll('.page-btn')
@@ -151,19 +151,21 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 3
-      }
+        currentPage: 3,
+      },
     })
 
     const pageButtons = wrapper.findAll('.page-btn')
-    const activeButton = pageButtons.find(button => button.classes().includes('active'))
+    const activeButton = pageButtons.find(button =>
+      button.classes().includes('active')
+    )
 
     expect(activeButton?.text()).toBe('3')
   })
 
   it('should emit page-change when clicking page number', async () => {
     const wrapper = mount(Pagination, {
-      props: defaultProps
+      props: defaultProps,
     })
 
     const pageButtons = wrapper.findAll('.page-btn')
@@ -180,13 +182,13 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        currentPage: 3
-      }
+        currentPage: 3,
+      },
     })
 
     const pageButtons = wrapper.findAll('.page-btn')
-    const currentPageButton = pageButtons.find(button => 
-      button.text() === '3' && button.classes().includes('active')
+    const currentPageButton = pageButtons.find(
+      button => button.text() === '3' && button.classes().includes('active')
     )
 
     if (currentPageButton) {
@@ -200,8 +202,8 @@ describe('Pagination', () => {
       props: {
         ...defaultProps,
         currentPage: 10,
-        totalPages: 20
-      }
+        totalPages: 20,
+      },
     })
 
     const ellipsis = wrapper.findAll('.ellipsis')
@@ -215,8 +217,8 @@ describe('Pagination', () => {
         currentPage: 3,
         totalPages: 5,
         totalItems: 50,
-        itemsPerPage: 10
-      }
+        itemsPerPage: 10,
+      },
     })
 
     expect(wrapper.text()).toContain('Showing 21 to 30 of 50 items')
@@ -229,8 +231,8 @@ describe('Pagination', () => {
         currentPage: 5,
         totalPages: 5,
         totalItems: 47, // Not a perfect multiple
-        itemsPerPage: 10
-      }
+        itemsPerPage: 10,
+      },
     })
 
     expect(wrapper.text()).toContain('Showing 41 to 47 of 47 items')
@@ -240,8 +242,8 @@ describe('Pagination', () => {
     const wrapper = mount(Pagination, {
       props: {
         ...defaultProps,
-        itemType: 'characters'
-      }
+        itemType: 'characters',
+      },
     })
 
     expect(wrapper.text()).toContain('Showing 1 to 10 of 50 characters')
@@ -252,8 +254,8 @@ describe('Pagination', () => {
       props: {
         ...defaultProps,
         currentPage: 2,
-        totalPages: 15
-      }
+        totalPages: 15,
+      },
     })
 
     // Should show pages 1,2,3,4,5,6 ... 15
@@ -272,8 +274,8 @@ describe('Pagination', () => {
       props: {
         ...defaultProps,
         currentPage: 14,
-        totalPages: 15
-      }
+        totalPages: 15,
+      },
     })
 
     // Should show 1,2,3,4 ... 13,14,15

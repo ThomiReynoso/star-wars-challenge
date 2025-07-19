@@ -5,9 +5,7 @@
         <div class="navbar-brand">
           <!-- Logo -->
           <router-link to="/" class="logo">
-            <div class="logo-text">
-              ⭐ Star Wars
-            </div>
+            <div class="logo-text">⭐ Star Wars</div>
           </router-link>
         </div>
 
@@ -16,15 +14,15 @@
           <router-link
             to="/people"
             class="nav-link"
-            :class="{ 'active': $route.path.startsWith('/people') }"
+            :class="{ active: $route.path.startsWith('/people') }"
           >
             Characters
           </router-link>
-          
+
           <router-link
             to="/planets"
             class="nav-link"
-            :class="{ 'active': $route.path.startsWith('/planets') }"
+            :class="{ active: $route.path.startsWith('/planets') }"
           >
             Planets
           </router-link>
@@ -36,7 +34,7 @@
 
 <style lang="scss" scoped>
 .navbar {
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-bottom: 1px solid #374151;
 }
 
@@ -44,11 +42,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-  
+
   @media (min-width: 640px) {
     padding: 0 1.5rem;
   }
-  
+
   @media (min-width: 1024px) {
     padding: 0 2rem;
   }
@@ -74,7 +72,7 @@
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0066CC;
+  color: #0066cc;
 }
 
 .navbar-nav {
@@ -84,20 +82,22 @@
 }
 
 .nav-link {
-  color: #D1D5DB;
+  color: #d1d5db;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease;
-  
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+
   &:hover {
     color: white;
   }
-  
+
   &.active {
-    color: #0066CC;
+    color: #0066cc;
     background-color: #374151;
   }
 }

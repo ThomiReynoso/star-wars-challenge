@@ -3,7 +3,9 @@
     <!-- Header -->
     <div class="list-header">
       <h2 class="list-title">Star Wars Planets</h2>
-      <p class="list-subtitle">Discover worlds across the galaxy with unique climates and terrains</p>
+      <p class="list-subtitle">
+        Discover worlds across the galaxy with unique climates and terrains
+      </p>
     </div>
 
     <!-- Loading State -->
@@ -31,7 +33,7 @@
       <!-- Table and Pagination (when there are results) -->
       <div v-if="planets.length > 0">
         <!-- Table View -->
-        <PlanetTable 
+        <PlanetTable
           :planets="planets"
           :sort-by="search.sortBy"
           :sort-order="search.sortOrder"
@@ -52,8 +54,18 @@
       <!-- Empty State with Search -->
       <div v-else-if="searchQuery.trim()" class="search-empty-state">
         <div class="empty-icon">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <svg
+            class="icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
           </svg>
         </div>
         <h3 class="empty-title">No planets found</h3>
@@ -101,7 +113,7 @@ const clearSearch = () => {
   searchQuery.value = ''
 }
 
-watch(searchQuery, (newQuery) => {
+watch(searchQuery, newQuery => {
   searchPlanets(newQuery)
 })
 
@@ -131,7 +143,7 @@ onMounted(() => {
 
 .list-subtitle {
   font-size: 1rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin: 0;
 }
 
@@ -142,7 +154,6 @@ onMounted(() => {
 .search-input {
   width: 100%;
 }
-
 
 .search-empty-state {
   display: flex;
@@ -155,11 +166,11 @@ onMounted(() => {
 
 .empty-icon {
   margin-bottom: 1.5rem;
-  
+
   .icon {
     height: 4rem;
     width: 4rem;
-    color: #6B7280;
+    color: #6b7280;
     stroke-width: 1;
   }
 }
@@ -173,7 +184,7 @@ onMounted(() => {
 
 .empty-subtitle {
   font-size: 1rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin: 0 0 2rem 0;
 }
 
@@ -187,12 +198,12 @@ onMounted(() => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
@@ -204,6 +215,6 @@ onMounted(() => {
 }
 
 .empty-message {
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 </style>

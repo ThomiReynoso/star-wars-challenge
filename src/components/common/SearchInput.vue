@@ -2,7 +2,9 @@
   <div class="search-container">
     <input
       :value="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @input="
+        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+      "
       type="text"
       :placeholder="placeholder"
       class="input-field search-input"
@@ -10,7 +12,12 @@
     />
     <div class="search-icon">
       <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        ></path>
       </svg>
     </div>
   </div>
@@ -59,6 +66,6 @@ defineEmits<Emits>()
 .icon {
   height: 1.375rem;
   width: 1.375rem;
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 </style>

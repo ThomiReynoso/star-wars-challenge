@@ -32,11 +32,7 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr
-          v-for="person in people"
-          :key="person.url"
-          class="table-row"
-        >
+        <tr v-for="person in people" :key="person.url" class="table-row">
           <td class="table-td">
             <div class="cell-primary">{{ person.name }}</div>
           </td>
@@ -80,11 +76,11 @@ const emit = defineEmits<Emits>()
 
 const sort = (field: 'name' | 'created') => {
   let newOrder: 'asc' | 'desc' = 'asc'
-  
+
   if (props.sortBy === field) {
     newOrder = props.sortOrder === 'asc' ? 'desc' : 'asc'
   }
-  
+
   emit('sort', field, newOrder)
 }
 </script>
@@ -96,7 +92,7 @@ const sort = (field: 'name' | 'created') => {
 
 .data-table {
   min-width: 100%;
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -110,15 +106,15 @@ const sort = (field: 'name' | 'created') => {
   text-align: left;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #D1D5DB;
+  color: #d1d5db;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  
+
   &.sortable {
     cursor: pointer;
     user-select: none;
     transition: background-color 0.2s ease;
-    
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.05);
     }
@@ -141,10 +137,10 @@ const sort = (field: 'name' | 'created') => {
 .sort-icon {
   font-size: 0.875rem;
   font-weight: bold;
-  color: #0066CC;
-  
+  color: #0066cc;
+
   &.inactive {
-    color: #6B7280;
+    color: #6b7280;
     opacity: 0.5;
   }
 }
@@ -157,7 +153,7 @@ const sort = (field: 'name' | 'created') => {
 
 .table-row {
   transition: background-color 0.2s ease;
-  
+
   &:hover {
     background-color: rgba(55, 65, 81, 0.8);
   }
@@ -176,8 +172,8 @@ const sort = (field: 'name' | 'created') => {
 
 .cell-secondary {
   font-size: 0.875rem;
-  color: #D1D5DB;
-  
+  color: #d1d5db;
+
   &.capitalize {
     text-transform: capitalize;
   }

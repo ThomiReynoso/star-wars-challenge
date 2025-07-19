@@ -28,9 +28,9 @@ defineEmits<Emits>()
 
 <style lang="scss" scoped>
 .error-message {
-  background-color: #7F1D1D;
-  border: 1px solid #DC2626;
-  color: #FCA5A5;
+  background-color: #7f1d1d;
+  border: 1px solid #dc2626;
+  color: #fca5a5;
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
   margin-bottom: 1rem;
@@ -39,7 +39,7 @@ defineEmits<Emits>()
 .error-text {
   display: block;
   margin-left: 0.5rem;
-  
+
   @media (min-width: 640px) {
     display: inline;
   }
