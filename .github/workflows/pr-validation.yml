@@ -1,0 +1,112 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # Validate PR requirements
+  pr-checks:
+    name: PR Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            test
+            chore
+            ci
+          requireScope: false
+          
+      - name: Check for breaking changes
+        run: |
+          # Check if there are any breaking changes in the PR
+          if git log --grep="BREAKING CHANGE" origin/main..HEAD --oneline | grep -q "BREAKING CHANGE"; then
+            echo "⚠️ Breaking changes detected in this PR"
+            echo "Please ensure proper versioning and documentation"
+          fi
+          
+      - name: Validate branch naming
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|hotfix|release|chore)/.+ ]]; then
+            echo "❌ Branch name doesn't follow convention: feature/, fix/, hotfix/, release/, or chore/"
+            echo "Current branch: $BRANCH_NAME"
+            exit 1
+          fi
+          echo "✅ Branch name follows convention"
+
+  # Full CI pipeline for PRs
+  pr-ci:
+    name: PR CI Pipeline
+    uses: ./.github/workflows/ci.yml
+    
+  # Preview deployment for PRs
+  preview-deployment:
+    name: Preview Deployment
+    runs-on: ubuntu-latest
+    needs: pr-ci
+    if: github.event.action != 'closed'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_API_URL: ${{ secrets.STAGING_API_URL }}
+          
+      - name: Deploy Preview
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: 'Preview Deploy - PR #${{ github.event.number }}'
+          alias: pr-${{ github.event.number }}
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STAGING_SITE_ID }}
+
+  # Cleanup preview on PR close
+  cleanup-preview:
+    name: Cleanup Preview
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    
+    steps:
+      - name: Delete preview deployment
+        run: |
+          echo "🧹 Cleaning up preview deployment for PR #${{ github.event.number }}"
+          # Add cleanup logic here if needed
