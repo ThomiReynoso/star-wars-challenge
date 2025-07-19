@@ -18,7 +18,7 @@
     />
 
     <!-- Content -->
-    <div v-else-if="planets.length > 0">
+    <div v-else>
       <!-- Search Bar -->
       <div class="search-section">
         <SearchInput
@@ -28,28 +28,45 @@
         />
       </div>
 
-      <!-- Table View -->
-      <PlanetTable 
-        :planets="planets"
-        :sort-by="search.sortBy"
-        :sort-order="search.sortOrder"
-        @sort="handleSort"
-      />
+      <!-- Table and Pagination (when there are results) -->
+      <div v-if="planets.length > 0">
+        <!-- Table View -->
+        <PlanetTable 
+          :planets="planets"
+          :sort-by="search.sortBy"
+          :sort-order="search.sortOrder"
+          @sort="handleSort"
+        />
 
-      <!-- Pagination -->
-      <Pagination
-        :current-page="pagination.currentPage"
-        :total-pages="pagination.totalPages"
-        :total-items="pagination.totalItems"
-        :items-per-page="pagination.itemsPerPage"
-        item-type="planets"
-        @page-change="goToPage"
-      />
-    </div>
+        <!-- Pagination -->
+        <Pagination
+          :current-page="pagination.currentPage"
+          :total-pages="pagination.totalPages"
+          :total-items="pagination.totalItems"
+          :items-per-page="pagination.itemsPerPage"
+          item-type="planets"
+          @page-change="goToPage"
+        />
+      </div>
 
-    <!-- Empty State -->
-    <div v-else class="empty-state">
-      <p class="empty-message">No planets found.</p>
+      <!-- Empty State with Search -->
+      <div v-else-if="searchQuery.trim()" class="search-empty-state">
+        <div class="empty-icon">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="empty-title">No planets found</h3>
+        <p class="empty-subtitle">Try adjusting your search terms</p>
+        <button @click="clearSearch" class="clear-search-btn">
+          Clear search
+        </button>
+      </div>
+
+      <!-- Default Empty State -->
+      <div v-else class="empty-state">
+        <p class="empty-message">No planets found.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +95,10 @@ const {
 
 const handleSort = (field: 'name' | 'created', order: 'asc' | 'desc') => {
   sortPlanets(field, order)
+}
+
+const clearSearch = () => {
+  searchQuery.value = ''
 }
 
 watch(searchQuery, (newQuery) => {
@@ -122,6 +143,60 @@ onMounted(() => {
   width: 100%;
 }
 
+
+.search-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 1.5rem;
+  
+  .icon {
+    height: 4rem;
+    width: 4rem;
+    color: #6B7280;
+    stroke-width: 1;
+  }
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-subtitle {
+  font-size: 1rem;
+  color: #9CA3AF;
+  margin: 0 0 2rem 0;
+}
+
+.clear-search-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
 
 .empty-state {
   text-align: center;
