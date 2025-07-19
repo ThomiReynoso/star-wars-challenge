@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="min-h-screen bg-gray-900">
+  <div id="app" class="app">
     <NavBar />
     
-    <main class="min-h-screen">
+    <main class="main">
       <router-view />
     </main>
   </div>
@@ -11,3 +11,14 @@
 <script setup lang="ts">
 import NavBar from '@/components/layout/NavBar.vue'
 </script>
+
+<style lang="scss" scoped>
+.app {
+  min-height: 100vh;
+  background-color: #111827;
+}
+
+.main {
+  min-height: 100vh;
+}
+</style>
