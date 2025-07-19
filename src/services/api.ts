@@ -8,7 +8,7 @@ class ApiService {
     this.baseUrl = baseUrl
   }
 
-  private async fetchWithRetry<T>(
+  public async fetchWithRetry<T>(
     url: string,
     options?: Record<string, unknown>,
     retries: number = RETRY_CONFIG.MAX_RETRIES
