@@ -9,6 +9,7 @@
       :placeholder="placeholder"
       class="input-field search-input"
       :aria-label="placeholder"
+      data-testid="search-input"
     />
     <div class="search-icon">
       <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">

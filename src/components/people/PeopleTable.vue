@@ -1,9 +1,13 @@
 <template>
-  <div class="table-container">
+  <div class="table-container" data-testid="people-table">
     <table class="data-table">
       <thead class="table-header">
         <tr>
-          <th class="table-th sortable" @click="sort('name')">
+          <th
+            class="table-th sortable"
+            @click="sort('name')"
+            data-testid="sort-name"
+          >
             <div class="th-content">
               <span>Name</span>
               <div class="sort-indicator">
@@ -32,9 +36,16 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr v-for="person in people" :key="person.url" class="table-row">
+        <tr
+          v-for="person in people"
+          :key="person.url"
+          class="table-row"
+          data-testid="people-row"
+        >
           <td class="table-td">
-            <div class="cell-primary">{{ person.name }}</div>
+            <div class="cell-primary" data-testid="person-name">
+              {{ person.name }}
+            </div>
           </td>
           <td class="table-td">
             <div class="cell-secondary">{{ person.height }}cm</div>
