@@ -6,7 +6,7 @@ export function usePlanetDetail() {
   const planet = ref<Planet | null>(null)
   const loadingState = ref<LoadingState>({
     isLoading: false,
-    error: null
+    error: null,
   })
 
   const isLoading = computed(() => loadingState.value.isLoading)
@@ -15,12 +15,13 @@ export function usePlanetDetail() {
   const fetchPlanet = async (id: string) => {
     loadingState.value = { isLoading: true, error: null }
     planet.value = null
-    
+
     try {
       const data = await apiService.getPlanetById(id)
       planet.value = data
     } catch (err) {
-      loadingState.value.error = err instanceof Error ? err.message : 'Failed to fetch planet details'
+      loadingState.value.error =
+        err instanceof Error ? err.message : 'Failed to fetch planet details'
     } finally {
       loadingState.value.isLoading = false
     }
@@ -30,6 +31,6 @@ export function usePlanetDetail() {
     planet: computed(() => planet.value),
     isLoading,
     error,
-    fetchPlanet
+    fetchPlanet,
   }
 }

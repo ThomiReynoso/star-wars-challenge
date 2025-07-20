@@ -1,12 +1,10 @@
 <template>
   <div class="planet-detail">
     <div class="detail-header">
-      <button @click="goBack" class="back-button">
-        ← Back to Planets
-      </button>
+      <button @click="goBack" class="back-button">← Back to Planets</button>
       <h1 class="planet-name">{{ planet.name }}</h1>
     </div>
-    
+
     <div class="detail-card">
       <div class="detail-grid">
         <div class="detail-section">
@@ -17,11 +15,15 @@
           </div>
           <div class="detail-item">
             <span class="label">Rotation Period:</span>
-            <span class="value">{{ formatPeriod(planet.rotation_period, 'hours') }}</span>
+            <span class="value">{{
+              formatPeriod(planet.rotation_period, 'hours')
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="label">Orbital Period:</span>
-            <span class="value">{{ formatPeriod(planet.orbital_period, 'days') }}</span>
+            <span class="value">{{
+              formatPeriod(planet.orbital_period, 'days')
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="label">Gravity:</span>
