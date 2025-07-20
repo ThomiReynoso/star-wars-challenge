@@ -1,4 +1,5 @@
 /// <reference types="node" />
+/* eslint-env node */
 import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({

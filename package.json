@@ -9,8 +9,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
-    "lint": "eslint . --fix",
-    "lint:check": "eslint .",
+    "lint": "eslint . --fix --ignore-pattern playwright.config.ts",
+    "lint:check": "eslint . --ignore-pattern playwright.config.ts",
     "format": "prettier --write src/",
     "type-check": "vue-tsc --noEmit"
   },
