@@ -141,11 +141,12 @@ const formatPopulation = (population: string): string => {
 }
 
 .data-table {
-  min-width: 100%;
+  width: 100%;
   background: transparent;
   border-radius: 1rem;
   overflow: hidden;
   font-family: 'Orbitron', monospace;
+  table-layout: fixed;
 }
 
 .table-header {
@@ -158,14 +159,22 @@ const formatPopulation = (population: string): string => {
 }
 
 .table-th {
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 0.5rem;
   text-align: left;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: $secondary-neon;
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
+  
+  &:first-child {
+    padding-left: 1rem;
+  }
+  
+  &:last-child {
+    padding-right: 1rem;
+  }
 
   &.sortable {
     cursor: pointer;
@@ -236,9 +245,17 @@ const formatPopulation = (population: string): string => {
 }
 
 .table-td {
-  padding: 1.2rem 1.5rem;
-  white-space: nowrap;
+  padding: 0.75rem 0.5rem;
   border: none;
+  white-space: nowrap;
+  
+  &:first-child {
+    padding-left: 1rem;
+  }
+  
+  &:last-child {
+    padding-right: 1rem;
+  }
 }
 
 .cell-primary {
