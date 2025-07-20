@@ -30,12 +30,15 @@ module.exports = {
       },
     },
     {
-      files: [
-        'playwright.config.ts',
-        '**/tests/e2e/**/*.{j,t}s?(x)',
-      ],
+      files: ['playwright.config.ts', '**/tests/e2e/**/*.{j,t}s?(x)'],
       env: {
         node: true,
+      },
+      globals: {
+        process: 'readonly',
+      },
+      rules: {
+        'no-undef': 'off',
       },
     },
   ],
