@@ -112,8 +112,9 @@ const navigateToDetail = (person: Person) => {
 .table-container {
   overflow-x: auto;
   border-radius: 0.75rem;
-  background: linear-gradient(135deg, 
-    rgba(26, 26, 46, 0.8), 
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8),
     rgba(15, 15, 35, 0.7)
   );
   border: 1px solid rgba(35, 53, 84, 0.6);
@@ -130,8 +131,9 @@ const navigateToDetail = (person: Person) => {
 }
 
 .table-header {
-  background: linear-gradient(135deg, 
-    rgba(0, 212, 255, 0.08), 
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.08),
     rgba(100, 255, 218, 0.05)
   );
   border-bottom: 1px solid rgba(35, 53, 84, 0.8);

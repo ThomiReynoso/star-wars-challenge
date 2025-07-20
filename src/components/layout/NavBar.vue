@@ -36,14 +36,15 @@
 @use '@/assets/styles/main.scss' as *;
 
 .navbar {
-  background: linear-gradient(135deg, 
-    rgba(15, 15, 35, 0.95), 
+  background: linear-gradient(
+    135deg,
+    rgba(15, 15, 35, 0.95),
     rgba(26, 26, 46, 0.9)
   );
   border-bottom: 2px solid $border-glow;
   backdrop-filter: blur(20px);
   position: relative;
-  
+
   &:after {
     content: '';
     position: absolute;
@@ -132,7 +133,12 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 212, 255, 0.1),
+      transparent
+    );
     transition: left 0.5s;
   }
 
@@ -149,7 +155,11 @@
 
   &.active {
     color: $text-accent;
-    background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(0, 245, 255, 0.05));
+    background: linear-gradient(
+      135deg,
+      rgba(100, 255, 218, 0.1),
+      rgba(0, 245, 255, 0.05)
+    );
     border-color: $text-accent;
     box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
   }

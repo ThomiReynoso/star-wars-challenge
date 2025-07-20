@@ -123,7 +123,7 @@ const formatMass = (mass: string) => {
   @include neon-button;
   margin-bottom: 2rem;
   font-size: 0.9rem;
-  
+
   &:hover {
     transform: translateX(-3px) translateY(-2px);
   }
@@ -148,7 +148,7 @@ const formatMass = (mass: string) => {
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
-  
+
   &:hover {
     transform: translateY(-2px) scale(1.01);
   }
@@ -161,19 +161,21 @@ const formatMass = (mass: string) => {
 }
 
 .detail-section {
-  background: linear-gradient(135deg, 
-    rgba(0, 212, 255, 0.03), 
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.03),
     rgba(100, 255, 218, 0.02)
   );
   border: 1px solid rgba(35, 53, 84, 0.5);
   border-radius: 0.75rem;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  
+
   &:hover {
     border-color: $border-glow;
-    background: linear-gradient(135deg, 
-      rgba(0, 212, 255, 0.06), 
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.06),
       rgba(100, 255, 218, 0.03)
     );
   }
@@ -189,7 +191,7 @@ const formatMass = (mass: string) => {
     border-bottom: 2px solid $border-glow;
     padding-bottom: 0.75rem;
     position: relative;
-    
+
     &:after {
       content: '';
       position: absolute;
@@ -257,7 +259,7 @@ const formatMass = (mass: string) => {
     margin: 0 1rem;
     padding: 1.5rem;
   }
-  
+
   .detail-section {
     padding: 1.25rem;
   }

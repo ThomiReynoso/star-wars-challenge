@@ -133,8 +133,12 @@ const formatPopulation = (population: string) => {
   font-size: 0.9rem;
   border-color: $secondary-neon;
   color: $secondary-neon;
-  background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(114, 9, 183, 0.1));
-  
+  background: linear-gradient(
+    135deg,
+    rgba(157, 78, 221, 0.1),
+    rgba(114, 9, 183, 0.1)
+  );
+
   &:hover {
     transform: translateX(-3px) translateY(-2px);
     box-shadow: $purple-shadow;
@@ -162,7 +166,7 @@ const formatPopulation = (population: string) => {
   margin: 0 auto;
   border-color: rgba(157, 78, 221, 0.3);
   box-shadow: $purple-shadow;
-  
+
   &:hover {
     transform: translateY(-2px) scale(1.01);
     border-color: $secondary-neon;
@@ -176,19 +180,21 @@ const formatPopulation = (population: string) => {
 }
 
 .detail-section {
-  background: linear-gradient(135deg, 
-    rgba(157, 78, 221, 0.03), 
+  background: linear-gradient(
+    135deg,
+    rgba(157, 78, 221, 0.03),
     rgba(255, 0, 110, 0.02)
   );
   border: 1px solid rgba(157, 78, 221, 0.3);
   border-radius: 0.75rem;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  
+
   &:hover {
     border-color: $secondary-neon;
-    background: linear-gradient(135deg, 
-      rgba(157, 78, 221, 0.06), 
+    background: linear-gradient(
+      135deg,
+      rgba(157, 78, 221, 0.06),
       rgba(255, 0, 110, 0.03)
     );
   }
@@ -204,7 +210,7 @@ const formatPopulation = (population: string) => {
     border-bottom: 2px solid rgba(157, 78, 221, 0.4);
     padding-bottom: 0.75rem;
     position: relative;
-    
+
     &:after {
       content: '';
       position: absolute;
@@ -272,7 +278,7 @@ const formatPopulation = (population: string) => {
     margin: 0 1rem;
     padding: 1.5rem;
   }
-  
+
   .detail-section {
     padding: 1.25rem;
   }

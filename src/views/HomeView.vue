@@ -104,7 +104,12 @@
 }
 
 .hero-highlight {
-  background: linear-gradient(135deg, $primary-neon, $text-accent, $secondary-neon);
+  background: linear-gradient(
+    135deg,
+    $primary-neon,
+    $text-accent,
+    $secondary-neon
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -221,7 +226,11 @@
   padding: 1.5rem;
   border: 1px solid $border-glow;
   border-radius: 0.75rem;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.03), rgba(157, 78, 221, 0.03));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.03),
+    rgba(157, 78, 221, 0.03)
+  );
   transition: all 0.3s ease;
 
   &:hover {
