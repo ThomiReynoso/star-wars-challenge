@@ -167,11 +167,11 @@ const formatPopulation = (population: string): string => {
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
-  
+
   &:first-child {
     padding-left: 1rem;
   }
-  
+
   &:last-child {
     padding-right: 1rem;
   }
@@ -248,11 +248,11 @@ const formatPopulation = (population: string): string => {
   padding: 0.75rem 0.5rem;
   border: none;
   white-space: nowrap;
-  
+
   &:first-child {
     padding-left: 1rem;
   }
-  
+
   &:last-child {
     padding-right: 1rem;
   }
