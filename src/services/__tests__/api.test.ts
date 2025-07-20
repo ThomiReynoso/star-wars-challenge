@@ -280,7 +280,7 @@ describe('API Service', () => {
       const result = await apiService.getPersonById('1')
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://swapi.info/api/people/1/',
+        'https://swapi.info/api/people/1',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -304,7 +304,7 @@ describe('API Service', () => {
       )
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://swapi.info/api/people/999/',
+        'https://swapi.info/api/people/999',
         {
           headers: {
             'Content-Type': 'application/json',

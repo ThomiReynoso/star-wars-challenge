@@ -39,8 +39,9 @@
         <tr
           v-for="person in people"
           :key="person.url"
-          class="table-row"
+          class="table-row clickable-row"
           data-testid="people-row"
+          @click="navigateToDetail(person)"
         >
           <td class="table-td">
             <div class="cell-primary" data-testid="person-name">
@@ -69,8 +70,9 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import type { Person } from '@/types'
-import { formatDate } from '@/utils'
+import { formatDate, extractIdFromUrl } from '@/utils'
 
 interface Props {
   people: Person[]
@@ -84,6 +86,7 @@ interface Emits {
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
+const router = useRouter()
 
 const sort = (field: 'name' | 'created') => {
   let newOrder: 'asc' | 'desc' = 'asc'
@@ -93,6 +96,13 @@ const sort = (field: 'name' | 'created') => {
   }
 
   emit('sort', field, newOrder)
+}
+
+const navigateToDetail = (person: Person) => {
+  const id = extractIdFromUrl(person.url)
+  if (id) {
+    router.push(`/people/${id}`)
+  }
 }
 </script>
 
@@ -167,6 +177,15 @@ const sort = (field: 'name' | 'created') => {
 
   &:hover {
     background-color: rgba(55, 65, 81, 0.8);
+  }
+
+  &.clickable-row {
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 102, 204, 0.1);
+      transform: translateY(-1px);
+    }
   }
 }
 
