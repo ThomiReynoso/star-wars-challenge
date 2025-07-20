@@ -54,7 +54,7 @@ export function filterByName<T extends { name: string }>(
  * Extract ID from SWAPI URL
  */
 export function extractIdFromUrl(url: string): string {
-  const matches = url.match(/\/(\d+)\/$/)
+  const matches = url.match(/\/(\d+)\/?$/)
   return matches ? matches[1] : ''
 }
 

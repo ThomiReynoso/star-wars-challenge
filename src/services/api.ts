@@ -81,12 +81,12 @@ class ApiService {
   }
 
   async getPersonById(id: string): Promise<Person> {
-    const url = `${this.baseUrl}${API_ENDPOINTS.PEOPLE}/${id}/`
+    const url = `${this.baseUrl}${API_ENDPOINTS.PEOPLE}/${id}`
     return this.fetchWithRetry<Person>(url)
   }
 
   async getPlanetById(id: string): Promise<Planet> {
-    const url = `${this.baseUrl}${API_ENDPOINTS.PLANETS}/${id}/`
+    const url = `${this.baseUrl}${API_ENDPOINTS.PLANETS}/${id}`
     return this.fetchWithRetry<Planet>(url)
   }
 }
