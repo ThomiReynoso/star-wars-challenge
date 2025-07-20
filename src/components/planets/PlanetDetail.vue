@@ -114,62 +114,106 @@ const formatPopulation = (population: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/styles/main.scss' as *;
+
 .planet-detail {
-  color: #f3f4f6;
+  color: $text-bright;
+  min-height: 100vh;
+  position: relative;
 }
 
 .detail-header {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 .back-button {
-  background: #374151;
-  border: none;
-  color: #0066cc;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
+  @include neon-button;
+  margin-bottom: 2rem;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
-  margin-bottom: 1rem;
-
+  border-color: $secondary-neon;
+  color: $secondary-neon;
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(114, 9, 183, 0.1));
+  
   &:hover {
-    background: #4b5563;
-    transform: translateX(-2px);
+    transform: translateX(-3px) translateY(-2px);
+    box-shadow: $purple-shadow;
   }
 }
 
 .planet-name {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, #0066cc, #0080ff);
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, $secondary-neon, $accent-pink);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+  animation: pulse-neon 4s infinite;
 }
 
 .detail-card {
-  background: #374151;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  @include holographic-card;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-color: rgba(157, 78, 221, 0.3);
+  box-shadow: $purple-shadow;
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.01);
+    border-color: $secondary-neon;
+  }
 }
 
 .detail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
 }
 
 .detail-section {
+  background: linear-gradient(135deg, 
+    rgba(157, 78, 221, 0.03), 
+    rgba(255, 0, 110, 0.02)
+  );
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: $secondary-neon;
+    background: linear-gradient(135deg, 
+      rgba(157, 78, 221, 0.06), 
+      rgba(255, 0, 110, 0.03)
+    );
+  }
+
   h2 {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-    color: #0066cc;
-    border-bottom: 2px solid #4b5563;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: $secondary-neon;
+    font-family: 'Orbitron', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid rgba(157, 78, 221, 0.4);
+    padding-bottom: 0.75rem;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 30%;
+      height: 2px;
+      background: linear-gradient(90deg, $secondary-neon, transparent);
+    }
   }
 
   &.full-width {
@@ -181,8 +225,15 @@ const formatPopulation = (population: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #4b5563;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(157, 78, 221, 0.02);
+    padding-left: 0.5rem;
+    border-bottom-color: $secondary-neon;
+  }
 
   &:last-child {
     border-bottom: none;
@@ -190,26 +241,40 @@ const formatPopulation = (population: string) => {
 
   .label {
     font-weight: 500;
-    color: #d1d5db;
+    color: $text-glow;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .value {
     font-weight: 600;
-    color: #f3f4f6;
+    color: $text-bright;
+    font-size: 1rem;
+    text-align: right;
+    max-width: 60%;
   }
 }
 
 @media (max-width: 768px) {
   .detail-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .planet-name {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
   }
 
   .detail-card {
+    margin: 0 1rem;
     padding: 1.5rem;
+  }
+  
+  .detail-section {
+    padding: 1.25rem;
   }
 }
 </style>
