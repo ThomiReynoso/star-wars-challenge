@@ -26,7 +26,9 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm run ci:install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
         
       - name: Run linting
         run: npm run lint
@@ -53,7 +55,9 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm run ci:install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
         
       - name: Run unit tests
         run: npm run test
@@ -118,7 +122,9 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm run ci:install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
         
       - name: Build application
         run: npm run build
@@ -146,7 +152,9 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm run ci:install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
         
       - name: Run security audit
         run: npm run audit:ci
