@@ -12,7 +12,10 @@
     "lint": "eslint . --fix --ignore-pattern playwright.config.ts",
     "lint:check": "eslint . --ignore-pattern playwright.config.ts",
     "format": "prettier --write src/",
-    "type-check": "tsc --noEmit --skipLibCheck"
+    "format:check": "prettier --check src/",
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "audit:ci": "npm audit --audit-level=critical",
+    "audit:dev": "npm audit"
   },
   "dependencies": {
     "vue": "^3.4.0",
