@@ -83,7 +83,9 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm run ci:install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
         
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
