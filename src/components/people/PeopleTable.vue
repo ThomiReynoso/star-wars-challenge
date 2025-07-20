@@ -107,37 +107,58 @@ const navigateToDetail = (person: Person) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .table-container {
   overflow-x: auto;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 46, 0.8), 
+    rgba(15, 15, 35, 0.7)
+  );
+  border: 1px solid rgba(35, 53, 84, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 .data-table {
   min-width: 100%;
-  background-color: #1f2937;
-  border-radius: 0.5rem;
+  background: transparent;
+  border-radius: 1rem;
   overflow: hidden;
+  font-family: 'Orbitron', monospace;
 }
 
 .table-header {
-  background-color: #374151;
+  background: linear-gradient(135deg, 
+    rgba(0, 212, 255, 0.08), 
+    rgba(100, 255, 218, 0.05)
+  );
+  border-bottom: 1px solid rgba(35, 53, 84, 0.8);
 }
 
 .table-th {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
   text-align: left;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #d1d5db;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $text-accent;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 1px;
+  border: none;
 
   &.sortable {
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
+      background: rgba(100, 255, 218, 0.06);
+      color: $primary-neon;
+
+      .sort-icon {
+        color: $primary-neon;
+      }
     }
   }
 }
@@ -146,63 +167,73 @@ const navigateToDetail = (person: Person) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .sort-indicator {
   display: flex;
   align-items: center;
-  min-width: 1rem;
+  min-width: 1.2rem;
 }
 
 .sort-icon {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: bold;
-  color: #0066cc;
+  color: $text-accent;
+  transition: all 0.3s ease;
 
   &.inactive {
-    color: #6b7280;
-    opacity: 0.5;
+    color: $text-dim;
+    opacity: 0.6;
   }
 }
 
 .table-body {
   tr:not(:last-child) {
-    border-bottom: 1px solid #374151;
+    border-bottom: 1px solid rgba(35, 53, 84, 0.5);
   }
 }
 
 .table-row {
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: rgba(55, 65, 81, 0.8);
+    background: rgba(0, 212, 255, 0.05);
   }
 
   &.clickable-row {
     cursor: pointer;
 
     &:hover {
-      background-color: rgba(0, 102, 204, 0.1);
+      background: rgba(0, 212, 255, 0.08);
       transform: translateY(-1px);
+
+      .cell-primary {
+        color: $primary-neon;
+      }
     }
   }
 }
 
 .table-td {
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   white-space: nowrap;
+  border: none;
 }
 
 .cell-primary {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $text-bright;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .cell-secondary {
-  font-size: 0.875rem;
-  color: #d1d5db;
+  font-size: 0.85rem;
+  color: $text-glow;
+  font-weight: 400;
+  transition: all 0.3s ease;
 
   &.capitalize {
     text-transform: capitalize;
