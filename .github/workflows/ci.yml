@@ -56,7 +56,7 @@ jobs:
         run: npm run ci:install
         
       - name: Run unit tests
-        run: npm test -- --run
+        run: npm run test
         
       # TODO: Re-enable when coverage dependency is resolved
       # - name: Upload coverage reports
