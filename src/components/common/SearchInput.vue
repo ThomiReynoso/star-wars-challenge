@@ -7,7 +7,7 @@
       "
       type="text"
       :placeholder="placeholder"
-      class="input-field search-input"
+      class="cyber-input search-input"
       :aria-label="placeholder"
       data-testid="search-input"
     />
@@ -39,34 +39,60 @@ defineEmits<Emits>()
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .search-container {
   position: relative;
+  width: 100%;
 }
 
 .search-input {
   width: 100%;
-  padding-left: 2.75rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-left: 3rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   font-size: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: $text-dim;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+
+  &:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+
+    + .search-icon .icon {
+      color: $primary-neon;
+      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+      animation: pulse-neon 2s infinite;
+    }
+  }
 }
 
 .search-icon {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding-left: 0.875rem;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   pointer-events: none;
+  z-index: 1;
 }
 
 .icon {
-  height: 1.375rem;
-  width: 1.375rem;
-  color: #9ca3af;
+  height: 1.5rem;
+  width: 1.5rem;
+  color: $text-accent;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(100, 255, 218, 0.3));
 }
 </style>

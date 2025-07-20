@@ -194,11 +194,22 @@ const goToPage = (page: number) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .pagination {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.9),
+    rgba(15, 15, 35, 0.8)
+  );
+  border: 1px solid $border-glow;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -209,74 +220,109 @@ const goToPage = (page: number) => {
 
 .pagination-info {
   .pagination-text {
-    font-size: 0.875rem;
-    color: #9ca3af;
+    font-size: 0.9rem;
+    color: $text-glow;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 }
 
 .pagination-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .pagination-btn {
+  @include neon-button;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #4b5563;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover:not(.disabled) {
-    background-color: #374151;
-  }
+  font-size: 0.85rem;
+  padding: 0.75rem 1.25rem;
 
   &.disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
+    border-color: $text-dim;
+    color: $text-dim;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 }
 
 .pagination-icon {
   height: 1rem;
   width: 1rem;
+  transition: all 0.3s ease;
 }
 
 .page-numbers {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .page-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: #4b5563;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8),
+    rgba(15, 15, 35, 0.6)
+  );
+  color: $text-glow;
+  border: 1px solid $border-glow;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', monospace;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
 
   &:hover {
-    background-color: #374151;
+    border-color: $primary-neon;
+    color: $primary-neon;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+
+    &:before {
+      left: 100%;
+    }
   }
 
   &.active {
-    background-color: #0066cc;
-    color: white;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.2),
+      rgba(100, 255, 218, 0.1)
+    );
+    border-color: $text-accent;
+    color: $text-accent;
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.6);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+    transform: scale(1.1);
   }
 }
 
@@ -284,9 +330,12 @@ const goToPage = (page: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  color: #9ca3af;
-  font-weight: 500;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: $text-accent;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+  text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+  animation: pulse-neon 3s infinite;
 }
 </style>
