@@ -197,9 +197,10 @@ const formatMass = (mass: string) => {
 .detail-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 12px 0;
   border-bottom: 1px solid rgba(70, 80, 100, 0.2);
+  gap: 12px;
 
   &:last-child {
     border-bottom: none;
@@ -213,6 +214,8 @@ const formatMass = (mass: string) => {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    flex-shrink: 0;
+    min-width: 120px;
   }
 
   .value {
@@ -220,7 +223,10 @@ const formatMass = (mass: string) => {
     color: #e2e8f0;
     font-size: 15px;
     text-align: right;
+    word-break: break-word;
+    overflow-wrap: break-word;
     max-width: 60%;
+    flex: 1;
   }
 }
 
