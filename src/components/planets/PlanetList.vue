@@ -153,6 +153,15 @@ onMounted(() => {
 
 .search-input {
   width: 100%;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8),
+    rgba(15, 15, 35, 0.7)
+  );
+  border: 1px solid rgba(35, 53, 84, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 .search-empty-state {

@@ -194,11 +194,18 @@ const goToPage = (page: number) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .pagination {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 1.5rem;
+  padding: 16px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -209,74 +216,92 @@ const goToPage = (page: number) => {
 
 .pagination-info {
   .pagination-text {
-    font-size: 0.875rem;
-    color: #9ca3af;
+    font-size: 14px;
+    color: #a0aec0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
 
 .pagination-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .pagination-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #4b5563;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+  gap: 6px;
+  font-size: 14px;
+  padding: 8px 12px;
+  background: rgba(66, 153, 225, 0.1);
+  border: 1px solid #4299e1;
+  color: #4299e1;
+  border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-
-  &:hover:not(.disabled) {
-    background-color: #374151;
-  }
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    border-color: #718096;
+    color: #718096;
+    background: rgba(113, 128, 150, 0.1);
+
+    &:hover {
+      background: rgba(113, 128, 150, 0.1);
+    }
+  }
+
+  &:hover:not(.disabled) {
+    background: rgba(66, 153, 225, 0.2);
+    border-color: #63b3ed;
   }
 }
 
 .pagination-icon {
-  height: 1rem;
-  width: 1rem;
+  height: 16px;
+  width: 16px;
 }
 
 .page-numbers {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 4px;
 }
 
 .page-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: #4b5563;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+  width: 36px;
+  height: 36px;
+  background: rgba(70, 80, 100, 0.2);
+  color: #a0aec0;
+  border: 1px solid rgba(100, 110, 130, 0.3);
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   &:hover {
-    background-color: #374151;
+    border-color: #4299e1;
+    color: #4299e1;
+    background: rgba(66, 153, 225, 0.1);
   }
 
   &.active {
-    background-color: #0066cc;
-    color: white;
+    background: rgba(66, 153, 225, 0.2);
+    border-color: #4299e1;
+    color: #4299e1;
+    font-weight: 600;
   }
 }
 
@@ -284,9 +309,11 @@ const goToPage = (page: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  color: #9ca3af;
+  width: 36px;
+  height: 36px;
+  color: #a0aec0;
   font-weight: 500;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 </style>

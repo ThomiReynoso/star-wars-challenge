@@ -33,9 +33,28 @@
 </template>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .navbar {
-  background-color: #1f2937;
-  border-bottom: 1px solid #374151;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 15, 35, 0.95),
+    rgba(26, 26, 46, 0.9)
+  );
+  border-bottom: 2px solid $border-glow;
+  backdrop-filter: blur(20px);
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $primary-neon, transparent);
+    animation: scan 4s infinite;
+  }
 }
 
 .navbar-container {
@@ -55,7 +74,8 @@
 .navbar-content {
   display: flex;
   justify-content: space-between;
-  height: 4rem;
+  align-items: center;
+  height: 4.5rem;
 }
 
 .navbar-brand {
@@ -67,38 +87,81 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #0066cc;
+  background: linear-gradient(135deg, $primary-neon, $text-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 2px;
 }
 
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .nav-link {
-  color: #d1d5db;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  color: $text-glow;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   text-decoration: none;
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 212, 255, 0.1),
+      transparent
+    );
+    transition: left 0.5s;
+  }
 
   &:hover {
-    color: white;
+    color: $primary-neon;
+    border-color: $border-glow;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    transform: translateY(-2px);
+
+    &:before {
+      left: 100%;
+    }
   }
 
   &.active {
-    color: #0066cc;
-    background-color: #374151;
+    color: $text-accent;
+    background: linear-gradient(
+      135deg,
+      rgba(100, 255, 218, 0.1),
+      rgba(0, 245, 255, 0.05)
+    );
+    border-color: $text-accent;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
   }
 }
 </style>

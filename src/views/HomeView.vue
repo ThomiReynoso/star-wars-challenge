@@ -69,42 +69,67 @@
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .home {
   padding: 4rem 1rem;
   text-align: center;
+  position: relative;
 }
 
 .home-container {
   max-width: 1024px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .hero {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+  animation: float 6s ease-in-out infinite;
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
+  color: $text-bright;
+  margin-bottom: 1.5rem;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 }
 
 .hero-highlight {
-  color: #0066cc;
+  background: linear-gradient(
+    135deg,
+    $primary-neon,
+    $text-accent,
+    $secondary-neon
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  animation: pulse-neon 3s infinite;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  color: #d1d5db;
+  font-size: 1.4rem;
+  color: $text-glow;
   margin-bottom: 2rem;
+  font-style: italic;
+  letter-spacing: 1px;
 }
 
 .nav-cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 2.5rem;
+  margin-bottom: 4rem;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -112,78 +137,120 @@
 }
 
 .nav-card {
-  background-color: #1f2937;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  border: 1px solid #374151;
+  @include holographic-card;
   text-decoration: none;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    background-color: #374151;
-    transform: scale(1.05);
-
     .nav-card-title {
-      color: #0066cc;
+      color: $primary-neon;
+      text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    }
+
+    .nav-card-icon {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    .nav-card-cta {
+      color: $text-accent;
+      transform: translateX(5px);
     }
   }
 }
 
 .nav-card-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
 }
 
 .nav-card-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: white;
-  margin-bottom: 0.75rem;
-  transition: color 0.3s ease;
+  color: $text-bright;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .nav-card-description {
-  color: #d1d5db;
-  margin-bottom: 1rem;
+  color: $text-glow;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
 }
 
 .nav-card-cta {
-  color: #0066cc;
+  color: $primary-neon;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', monospace;
 }
 
 .features {
-  background-color: #1f2937;
-  border-radius: 0.5rem;
-  padding: 2rem;
+  @include holographic-card;
+  text-align: left;
 }
 
 .features-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: white;
-  margin-bottom: 1.5rem;
+  color: $text-bright;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, $primary-neon, $text-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  text-align: left;
+  gap: 2rem;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
+.feature {
+  padding: 1.5rem;
+  border: 1px solid $border-glow;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.03),
+    rgba(157, 78, 221, 0.03)
+  );
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-neon;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    transform: translateY(-3px);
+  }
+}
+
 .feature-title {
-  color: #0066cc;
+  color: $text-accent;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
 .feature-description {
-  color: #d1d5db;
-  font-size: 0.875rem;
+  color: $text-glow;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 </style>

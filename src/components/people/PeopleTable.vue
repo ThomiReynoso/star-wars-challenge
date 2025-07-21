@@ -107,37 +107,50 @@ const navigateToDetail = (person: Person) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/main.scss' as *;
+
 .table-container {
   overflow-x: auto;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .data-table {
   min-width: 100%;
-  background-color: #1f2937;
-  border-radius: 0.5rem;
-  overflow: hidden;
+  background: transparent;
+  border-collapse: collapse;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .table-header {
-  background-color: #374151;
+  background: rgba(50, 60, 80, 0.3);
+  border-bottom: 1px solid rgba(100, 110, 130, 0.3);
 }
 
 .table-th {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 16px;
   text-align: left;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #d1d5db;
+  font-size: 14px;
+  font-weight: 600;
+  color: #a0aec0;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
+  border: none;
 
   &.sortable {
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.2s ease;
+    transition: color 0.2s ease;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
+      color: #4299e1;
+
+      .sort-icon {
+        color: #4299e1;
+      }
     }
   }
 }
@@ -146,29 +159,30 @@ const navigateToDetail = (person: Person) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .sort-indicator {
   display: flex;
   align-items: center;
-  min-width: 1rem;
+  min-width: 1.2rem;
 }
 
 .sort-icon {
-  font-size: 0.875rem;
-  font-weight: bold;
-  color: #0066cc;
+  font-size: 14px;
+  font-weight: normal;
+  color: #a0aec0;
+  transition: color 0.2s ease;
 
   &.inactive {
-    color: #6b7280;
-    opacity: 0.5;
+    color: #718096;
+    opacity: 0.7;
   }
 }
 
 .table-body {
   tr:not(:last-child) {
-    border-bottom: 1px solid #374151;
+    border-bottom: 1px solid rgba(70, 80, 100, 0.2);
   }
 }
 
@@ -176,33 +190,39 @@ const navigateToDetail = (person: Person) => {
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: rgba(55, 65, 81, 0.8);
+    background: rgba(100, 120, 150, 0.08);
   }
 
   &.clickable-row {
     cursor: pointer;
 
     &:hover {
-      background-color: rgba(0, 102, 204, 0.1);
-      transform: translateY(-1px);
+      background: rgba(100, 120, 150, 0.12);
+
+      .cell-primary {
+        color: #4299e1;
+      }
     }
   }
 }
 
 .table-td {
-  padding: 1rem 1.5rem;
+  padding: 12px 16px;
   white-space: nowrap;
+  border: none;
 }
 
 .cell-primary {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f0;
+  transition: color 0.2s ease;
 }
 
 .cell-secondary {
-  font-size: 0.875rem;
-  color: #d1d5db;
+  font-size: 14px;
+  color: #a0aec0;
+  font-weight: 400;
 
   &.capitalize {
     text-transform: capitalize;

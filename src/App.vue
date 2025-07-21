@@ -15,10 +15,12 @@ import NavBar from '@/components/layout/NavBar.vue'
 <style lang="scss" scoped>
 .app {
   min-height: 100vh;
-  background-color: #111827;
+  position: relative;
+  z-index: 1;
 }
 
 .main {
   min-height: 100vh;
+  position: relative;
 }
 </style>

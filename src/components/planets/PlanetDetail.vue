@@ -114,62 +114,87 @@ const formatPopulation = (population: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/styles/main.scss' as *;
+
 .planet-detail {
-  color: #f3f4f6;
+  color: #e2e8f0;
+  min-height: 100vh;
+  position: relative;
 }
 
 .detail-header {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .back-button {
-  background: #374151;
-  border: none;
-  color: #0066cc;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  background: rgba(159, 122, 234, 0.1);
+  border: 1px solid #9f7aea;
+  color: #9f7aea;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
   transition: all 0.2s ease;
-  margin-bottom: 1rem;
+  text-decoration: none;
+  display: inline-block;
 
   &:hover {
-    background: #4b5563;
-    transform: translateX(-2px);
+    background: rgba(159, 122, 234, 0.2);
+    border-color: #b794f6;
   }
 }
 
 .planet-name {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, #0066cc, #0080ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #e2e8f0;
+  letter-spacing: 1px;
 }
 
 .detail-card {
-  background: #374151;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .detail-section {
+  background: rgba(50, 60, 80, 0.2);
+  border: 1px solid rgba(100, 110, 130, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(100, 110, 130, 0.5);
+  }
+
   h2 {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #0066cc;
-    border-bottom: 2px solid #4b5563;
-    padding-bottom: 0.5rem;
+    color: #9f7aea;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(100, 110, 130, 0.3);
+    padding-bottom: 8px;
   }
 
   &.full-width {
@@ -181,8 +206,8 @@ const formatPopulation = (population: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #4b5563;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(70, 80, 100, 0.2);
 
   &:last-child {
     border-bottom: none;
@@ -190,18 +215,27 @@ const formatPopulation = (population: string) => {
 
   .label {
     font-weight: 500;
-    color: #d1d5db;
+    color: #a0aec0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .value {
     font-weight: 600;
-    color: #f3f4f6;
+    color: #e2e8f0;
+    font-size: 15px;
+    text-align: right;
+    max-width: 60%;
   }
 }
 
 @media (max-width: 768px) {
   .detail-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .planet-name {
@@ -209,7 +243,12 @@ const formatPopulation = (population: string) => {
   }
 
   .detail-card {
-    padding: 1.5rem;
+    margin: 0 1rem;
+    padding: 16px;
+  }
+
+  .detail-section {
+    padding: 16px;
   }
 }
 </style>
