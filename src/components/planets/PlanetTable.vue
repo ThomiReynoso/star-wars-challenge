@@ -129,64 +129,54 @@ const formatPopulation = (population: string): string => {
 
 .table-container {
   overflow-x: auto;
-  border-radius: 0.75rem;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 46, 0.8),
-    rgba(15, 15, 35, 0.7)
-  );
-  border: 1px solid rgba(35, 53, 84, 0.6);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .data-table {
   width: 100%;
   background: transparent;
-  border-radius: 1rem;
-  overflow: hidden;
-  font-family: 'Orbitron', monospace;
+  border-collapse: collapse;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   table-layout: fixed;
 }
 
 .table-header {
-  background: linear-gradient(
-    135deg,
-    rgba(157, 78, 221, 0.08),
-    rgba(114, 9, 183, 0.05)
-  );
-  border-bottom: 1px solid rgba(35, 53, 84, 0.8);
+  background: rgba(50, 60, 80, 0.3);
+  border-bottom: 1px solid rgba(100, 110, 130, 0.3);
 }
 
 .table-th {
-  padding: 0.75rem 0.5rem;
+  padding: 12px 8px;
   text-align: left;
-  font-size: 0.8rem;
+  font-size: 14px;
   font-weight: 600;
-  color: $secondary-neon;
+  color: #a0aec0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   border: none;
 
   &:first-child {
-    padding-left: 1rem;
+    padding-left: 16px;
   }
 
   &:last-child {
-    padding-right: 1rem;
+    padding-right: 16px;
   }
 
   &.sortable {
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
 
     &:hover {
-      background: rgba(157, 78, 221, 0.06);
-      color: $accent-purple;
+      color: #9f7aea;
 
       .sort-icon {
-        color: $accent-purple;
+        color: #9f7aea;
       }
     }
   }
@@ -206,71 +196,68 @@ const formatPopulation = (population: string): string => {
 }
 
 .sort-icon {
-  font-size: 1rem;
-  font-weight: bold;
-  color: $secondary-neon;
-  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: normal;
+  color: #a0aec0;
+  transition: color 0.2s ease;
 
   &.inactive {
-    color: $text-dim;
-    opacity: 0.6;
+    color: #718096;
+    opacity: 0.7;
   }
 }
 
 .table-body {
   tr:not(:last-child) {
-    border-bottom: 1px solid rgba(35, 53, 84, 0.5);
+    border-bottom: 1px solid rgba(70, 80, 100, 0.2);
   }
 }
 
 .table-row {
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background: rgba(157, 78, 221, 0.05);
+    background: rgba(120, 100, 150, 0.08);
   }
 
   &.clickable-row {
     cursor: pointer;
 
     &:hover {
-      background: rgba(157, 78, 221, 0.08);
-      transform: translateY(-1px);
+      background: rgba(120, 100, 150, 0.12);
 
       .cell-primary {
-        color: $secondary-neon;
+        color: #9f7aea;
       }
     }
   }
 }
 
 .table-td {
-  padding: 0.75rem 0.5rem;
+  padding: 12px 8px;
   border: none;
   white-space: nowrap;
 
   &:first-child {
-    padding-left: 1rem;
+    padding-left: 16px;
   }
 
   &:last-child {
-    padding-right: 1rem;
+    padding-right: 16px;
   }
 }
 
 .cell-primary {
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 600;
-  color: $text-bright;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  color: #e2e8f0;
+  transition: color 0.2s ease;
 }
 
 .cell-secondary {
-  font-size: 0.85rem;
-  color: $text-glow;
+  font-size: 14px;
+  color: #a0aec0;
   font-weight: 400;
-  transition: all 0.3s ease;
 
   &.capitalize {
     text-transform: capitalize;
