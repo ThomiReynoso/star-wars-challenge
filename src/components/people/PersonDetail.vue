@@ -109,98 +109,84 @@ const formatMass = (mass: string) => {
 @use '@/assets/styles/main.scss' as *;
 
 .person-detail {
-  color: $text-bright;
+  color: #e2e8f0;
   min-height: 100vh;
   position: relative;
 }
 
 .detail-header {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 .back-button {
-  @include neon-button;
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
+  background: rgba(66, 153, 225, 0.1);
+  border: 1px solid #4299e1;
+  color: #4299e1;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
 
   &:hover {
-    transform: translateX(-3px) translateY(-2px);
+    background: rgba(66, 153, 225, 0.2);
+    border-color: #63b3ed;
   }
 }
 
 .person-name {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
-  font-family: 'Orbitron', monospace;
-  letter-spacing: 3px;
-  background: linear-gradient(135deg, $primary-neon, $text-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-  animation: pulse-neon 4s infinite;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #e2e8f0;
+  letter-spacing: 1px;
 }
 
 .detail-card {
-  @include holographic-card;
-  position: relative;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   max-width: 1000px;
   margin: 0 auto;
-
-  &:hover {
-    transform: translateY(-2px) scale(1.01);
-  }
 }
 
 .detail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .detail-section {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 212, 255, 0.03),
-    rgba(100, 255, 218, 0.02)
-  );
-  border: 1px solid rgba(35, 53, 84, 0.5);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
+  background: rgba(50, 60, 80, 0.2);
+  border: 1px solid rgba(100, 110, 130, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.2s ease;
 
   &:hover {
-    border-color: $border-glow;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 212, 255, 0.06),
-      rgba(100, 255, 218, 0.03)
-    );
+    border-color: rgba(100, 110, 130, 0.5);
   }
 
   h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: $text-accent;
-    font-family: 'Orbitron', monospace;
+    margin-bottom: 1rem;
+    color: #4299e1;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2px solid $border-glow;
-    padding-bottom: 0.75rem;
-    position: relative;
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 30%;
-      height: 2px;
-      background: linear-gradient(90deg, $primary-neon, transparent);
-    }
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(100, 110, 130, 0.3);
+    padding-bottom: 8px;
   }
 
   &.full-width {
@@ -212,15 +198,8 @@ const formatMass = (mass: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(35, 53, 84, 0.3);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(0, 212, 255, 0.02);
-    padding-left: 0.5rem;
-    border-bottom-color: $border-glow;
-  }
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(70, 80, 100, 0.2);
 
   &:last-child {
     border-bottom: none;
@@ -228,17 +207,18 @@ const formatMass = (mass: string) => {
 
   .label {
     font-weight: 500;
-    color: $text-glow;
-    font-family: 'Orbitron', monospace;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    color: #a0aec0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .value {
     font-weight: 600;
-    color: $text-bright;
-    font-size: 1rem;
+    color: #e2e8f0;
+    font-size: 15px;
     text-align: right;
     max-width: 60%;
   }
@@ -247,21 +227,20 @@ const formatMass = (mass: string) => {
 @media (max-width: 768px) {
   .detail-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .person-name {
-    font-size: 2.2rem;
-    letter-spacing: 2px;
+    font-size: 2rem;
   }
 
   .detail-card {
     margin: 0 1rem;
-    padding: 1.5rem;
+    padding: 16px;
   }
 
   .detail-section {
-    padding: 1.25rem;
+    padding: 16px;
   }
 }
 </style>

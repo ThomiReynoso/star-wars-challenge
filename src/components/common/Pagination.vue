@@ -199,17 +199,13 @@ const goToPage = (page: number) => {
 .pagination {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 46, 0.9),
-    rgba(15, 15, 35, 0.8)
-  );
-  border: 1px solid $border-glow;
-  border-radius: 1rem;
-  backdrop-filter: blur(10px);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 16px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(70, 80, 100, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -220,114 +216,92 @@ const goToPage = (page: number) => {
 
 .pagination-info {
   .pagination-text {
-    font-size: 0.9rem;
-    color: $text-glow;
-    font-family: 'Orbitron', monospace;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 14px;
+    color: #a0aec0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
 
 .pagination-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
 .pagination-btn {
-  @include neon-button;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  padding: 0.75rem 1.25rem;
+  gap: 6px;
+  font-size: 14px;
+  padding: 8px 12px;
+  background: rgba(66, 153, 225, 0.1);
+  border: 1px solid #4299e1;
+  color: #4299e1;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   &.disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
-    border-color: $text-dim;
-    color: $text-dim;
+    border-color: #718096;
+    color: #718096;
+    background: rgba(113, 128, 150, 0.1);
 
     &:hover {
-      transform: none;
-      box-shadow: none;
+      background: rgba(113, 128, 150, 0.1);
     }
+  }
+
+  &:hover:not(.disabled) {
+    background: rgba(66, 153, 225, 0.2);
+    border-color: #63b3ed;
   }
 }
 
 .pagination-icon {
-  height: 1rem;
-  width: 1rem;
-  transition: all 0.3s ease;
+  height: 16px;
+  width: 16px;
 }
 
 .page-numbers {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 4px;
 }
 
 .page-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 46, 0.8),
-    rgba(15, 15, 35, 0.6)
-  );
-  color: $text-glow;
-  border: 1px solid $border-glow;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  width: 36px;
+  height: 36px;
+  background: rgba(70, 80, 100, 0.2);
+  color: #a0aec0;
+  border: 1px solid rgba(100, 110, 130, 0.3);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Orbitron', monospace;
-  position: relative;
-  overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 212, 255, 0.1),
-      transparent
-    );
-    transition: left 0.5s;
-  }
+  transition: all 0.2s ease;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   &:hover {
-    border-color: $primary-neon;
-    color: $primary-neon;
-    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-    transform: translateY(-2px);
-
-    &:before {
-      left: 100%;
-    }
+    border-color: #4299e1;
+    color: #4299e1;
+    background: rgba(66, 153, 225, 0.1);
   }
 
   &.active {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 212, 255, 0.2),
-      rgba(100, 255, 218, 0.1)
-    );
-    border-color: $text-accent;
-    color: $text-accent;
-    text-shadow: 0 0 10px rgba(100, 255, 218, 0.6);
-    box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
-    transform: scale(1.1);
+    background: rgba(66, 153, 225, 0.2);
+    border-color: #4299e1;
+    color: #4299e1;
+    font-weight: 600;
   }
 }
 
@@ -335,12 +309,11 @@ const goToPage = (page: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  color: $text-accent;
-  font-weight: 600;
-  font-family: 'Orbitron', monospace;
-  text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
-  animation: pulse-neon 3s infinite;
+  width: 36px;
+  height: 36px;
+  color: #a0aec0;
+  font-weight: 500;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 </style>
