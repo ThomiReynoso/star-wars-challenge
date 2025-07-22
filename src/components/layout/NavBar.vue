@@ -1,20 +1,22 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar-container">
       <div class="navbar-content">
         <div class="navbar-brand">
           <!-- Logo -->
-          <router-link to="/" class="logo">
+          <router-link to="/" class="logo" aria-label="Star Wars - Home">
             <div class="logo-text">⭐ Star Wars</div>
           </router-link>
         </div>
 
         <!-- Navigation Links -->
-        <div class="navbar-nav">
+        <div class="navbar-nav" role="menubar">
           <router-link
             to="/people"
             class="nav-link"
             :class="{ active: $route.path.startsWith('/people') }"
+            role="menuitem"
+            :aria-current="$route.path.startsWith('/people') ? 'page' : false"
           >
             Characters
           </router-link>
@@ -23,6 +25,8 @@
             to="/planets"
             class="nav-link"
             :class="{ active: $route.path.startsWith('/planets') }"
+            role="menuitem"
+            :aria-current="$route.path.startsWith('/planets') ? 'page' : false"
           >
             Planets
           </router-link>
@@ -89,8 +93,15 @@
   text-decoration: none;
   transition: all 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
     transform: scale(1.05);
+    outline: none;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+    border-radius: 4px;
   }
 }
 
@@ -142,15 +153,21 @@
     transition: left 0.5s;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $primary-neon;
     border-color: $border-glow;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     transform: translateY(-2px);
+    outline: none;
 
     &:before {
       left: 100%;
     }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
   }
 
   &.active {
