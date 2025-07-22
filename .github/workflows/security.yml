@@ -56,11 +56,11 @@ jobs:
         run: npm ci
         
       - name: Run npm audit
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=high
         
       - name: Check for known vulnerabilities
         run: |
-          npx audit-ci --moderate
+          npx audit-ci --high
           
   # License compliance
   license-check:
