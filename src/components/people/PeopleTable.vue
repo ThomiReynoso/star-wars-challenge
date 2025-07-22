@@ -6,6 +6,17 @@
           <th
             class="table-th sortable"
             @click="sort('name')"
+            @keydown.enter="sort('name')"
+            @keydown.space.prevent="sort('name')"
+            tabindex="0"
+            role="columnheader"
+            :aria-sort="
+              sortBy === 'name'
+                ? sortOrder === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : 'none'
+            "
             data-testid="sort-name"
           >
             <div class="th-content">
@@ -22,7 +33,21 @@
           <th class="table-th">Mass</th>
           <th class="table-th">Gender</th>
           <th class="table-th">Birth Year</th>
-          <th class="table-th sortable" @click="sort('created')">
+          <th
+            class="table-th sortable"
+            @click="sort('created')"
+            @keydown.enter="sort('created')"
+            @keydown.space.prevent="sort('created')"
+            tabindex="0"
+            role="columnheader"
+            :aria-sort="
+              sortBy === 'created'
+                ? sortOrder === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : 'none'
+            "
+          >
             <div class="th-content">
               <span>Created</span>
               <div class="sort-indicator">
@@ -42,6 +67,11 @@
           class="table-row clickable-row"
           data-testid="people-row"
           @click="navigateToDetail(person)"
+          @keydown.enter="navigateToDetail(person)"
+          @keydown.space.prevent="navigateToDetail(person)"
+          tabindex="0"
+          role="button"
+          :aria-label="`View details for ${person.name}`"
         >
           <td class="table-td">
             <div class="cell-primary" data-testid="person-name">
@@ -135,7 +165,7 @@ const navigateToDetail = (person: Person) => {
   text-align: left;
   font-size: 14px;
   font-weight: 600;
-  color: #a0aec0;
+  color: #d1d5db;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: none;
@@ -144,13 +174,20 @@ const navigateToDetail = (person: Person) => {
     cursor: pointer;
     user-select: none;
     transition: color 0.2s ease;
+    outline: none;
 
-    &:hover {
-      color: #4299e1;
+    &:hover,
+    &:focus {
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.15);
 
       .sort-icon {
         color: #4299e1;
       }
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.6);
     }
   }
 }
@@ -171,7 +208,7 @@ const navigateToDetail = (person: Person) => {
 .sort-icon {
   font-size: 14px;
   font-weight: normal;
-  color: #a0aec0;
+  color: #d1d5db;
   transition: color 0.2s ease;
 
   &.inactive {
@@ -195,13 +232,19 @@ const navigateToDetail = (person: Person) => {
 
   &.clickable-row {
     cursor: pointer;
+    outline: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: rgba(100, 120, 150, 0.12);
 
       .cell-primary {
-        color: #4299e1;
+        color: #60a5fa;
       }
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px rgba(96, 165, 250, 0.6);
     }
   }
 }
@@ -221,7 +264,7 @@ const navigateToDetail = (person: Person) => {
 
 .cell-secondary {
   font-size: 14px;
-  color: #a0aec0;
+  color: #d1d5db;
   font-weight: 400;
 
   &.capitalize {
