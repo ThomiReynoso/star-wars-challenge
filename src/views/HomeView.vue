@@ -47,9 +47,10 @@
             </p>
           </div>
           <div class="feature">
-            <div class="feature-title">📊 Multiple Views</div>
+            <div class="feature-title">📊 Table & Detail</div>
             <p class="feature-description">
-              Switch between card and table views to browse data your way
+              Browse data in organized tables, then view detailed information in
+              dedicated cards
             </p>
           </div>
           <div class="feature">

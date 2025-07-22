@@ -43,6 +43,8 @@
           class="page-btn"
           :class="{ active: currentPage === page }"
           :data-testid="currentPage === page ? 'current-page' : 'page-btn'"
+          :aria-label="`Go to page ${page}`"
+          :aria-current="currentPage === page ? 'page' : false"
         >
           {{ page }}
         </button>
@@ -59,6 +61,8 @@
           @click="goToPage(page)"
           class="page-btn"
           :class="{ active: currentPage === page }"
+          :aria-label="`Go to page ${page}`"
+          :aria-current="currentPage === page ? 'page' : false"
         >
           {{ page }}
         </button>
@@ -75,6 +79,8 @@
           @click="goToPage(page)"
           class="page-btn"
           :class="{ active: currentPage === page }"
+          :aria-label="`Go to page ${page}`"
+          :aria-current="currentPage === page ? 'page' : false"
         >
           {{ page }}
         </button>
@@ -217,7 +223,7 @@ const goToPage = (page: number) => {
 .pagination-info {
   .pagination-text {
     font-size: 14px;
-    color: #a0aec0;
+    color: #d1d5db;
     font-family:
       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -235,31 +241,37 @@ const goToPage = (page: number) => {
   gap: 6px;
   font-size: 14px;
   padding: 8px 12px;
-  background: rgba(66, 153, 225, 0.1);
-  border: 1px solid #4299e1;
-  color: #4299e1;
+  background: rgba(96, 165, 250, 0.15);
+  border: 1px solid #60a5fa;
+  color: #60a5fa;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  outline: none;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    border-color: #718096;
-    color: #718096;
-    background: rgba(113, 128, 150, 0.1);
+    border-color: #9ca3af;
+    color: #9ca3af;
+    background: rgba(156, 163, 175, 0.15);
 
     &:hover {
-      background: rgba(113, 128, 150, 0.1);
+      background: rgba(156, 163, 175, 0.15);
     }
   }
 
-  &:hover:not(.disabled) {
-    background: rgba(66, 153, 225, 0.2);
-    border-color: #63b3ed;
+  &:hover:not(.disabled),
+  &:focus:not(.disabled) {
+    background: rgba(96, 165, 250, 0.25);
+    border-color: #93c5fd;
+  }
+
+  &:focus:not(.disabled) {
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.4);
   }
 }
 
@@ -280,27 +292,33 @@ const goToPage = (page: number) => {
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: rgba(70, 80, 100, 0.2);
-  color: #a0aec0;
-  border: 1px solid rgba(100, 110, 130, 0.3);
+  background: rgba(70, 80, 100, 0.3);
+  color: #d1d5db;
+  border: 1px solid rgba(100, 110, 130, 0.4);
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  outline: none;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  &:hover {
-    border-color: #4299e1;
-    color: #4299e1;
-    background: rgba(66, 153, 225, 0.1);
+  &:hover,
+  &:focus {
+    border-color: #60a5fa;
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.15);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.4);
   }
 
   &.active {
-    background: rgba(66, 153, 225, 0.2);
-    border-color: #4299e1;
-    color: #4299e1;
+    background: rgba(96, 165, 250, 0.25);
+    border-color: #60a5fa;
+    color: #60a5fa;
     font-weight: 600;
   }
 }
@@ -311,7 +329,7 @@ const goToPage = (page: number) => {
   justify-content: center;
   width: 36px;
   height: 36px;
-  color: #a0aec0;
+  color: #d1d5db;
   font-weight: 500;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

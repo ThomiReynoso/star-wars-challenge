@@ -3,7 +3,21 @@
     <table class="data-table">
       <thead class="table-header">
         <tr>
-          <th class="table-th sortable" @click="sort('name')">
+          <th
+            class="table-th sortable"
+            @click="sort('name')"
+            @keydown.enter="sort('name')"
+            @keydown.space.prevent="sort('name')"
+            tabindex="0"
+            role="columnheader"
+            :aria-sort="
+              sortBy === 'name'
+                ? sortOrder === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : 'none'
+            "
+          >
             <div class="th-content">
               <span>Name</span>
               <div class="sort-indicator">
@@ -18,7 +32,21 @@
           <th class="table-th">Terrain</th>
           <th class="table-th">Population</th>
           <th class="table-th">Diameter</th>
-          <th class="table-th sortable" @click="sort('created')">
+          <th
+            class="table-th sortable"
+            @click="sort('created')"
+            @keydown.enter="sort('created')"
+            @keydown.space.prevent="sort('created')"
+            tabindex="0"
+            role="columnheader"
+            :aria-sort="
+              sortBy === 'created'
+                ? sortOrder === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : 'none'
+            "
+          >
             <div class="th-content">
               <span>Created</span>
               <div class="sort-indicator">
@@ -38,6 +66,11 @@
           class="table-row clickable-row"
           data-testid="planet-row"
           @click="navigateToDetail(planet)"
+          @keydown.enter="navigateToDetail(planet)"
+          @keydown.space.prevent="navigateToDetail(planet)"
+          tabindex="0"
+          role="button"
+          :aria-label="`View details for ${planet.name}`"
         >
           <td class="table-td">
             <div class="cell-primary" data-testid="planet-name">
@@ -154,7 +187,7 @@ const formatPopulation = (population: string): string => {
   text-align: left;
   font-size: 14px;
   font-weight: 600;
-  color: #a0aec0;
+  color: #d1d5db;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: none;
@@ -171,13 +204,20 @@ const formatPopulation = (population: string): string => {
     cursor: pointer;
     user-select: none;
     transition: color 0.2s ease;
+    outline: none;
 
-    &:hover {
-      color: #9f7aea;
+    &:hover,
+    &:focus {
+      color: #c084fc;
+      background: rgba(192, 132, 252, 0.15);
 
       .sort-icon {
         color: #9f7aea;
       }
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(192, 132, 252, 0.6);
     }
   }
 }
@@ -198,7 +238,7 @@ const formatPopulation = (population: string): string => {
 .sort-icon {
   font-size: 14px;
   font-weight: normal;
-  color: #a0aec0;
+  color: #d1d5db;
   transition: color 0.2s ease;
 
   &.inactive {
@@ -222,13 +262,19 @@ const formatPopulation = (population: string): string => {
 
   &.clickable-row {
     cursor: pointer;
+    outline: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: rgba(120, 100, 150, 0.12);
 
       .cell-primary {
-        color: #9f7aea;
+        color: #c084fc;
       }
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px rgba(192, 132, 252, 0.6);
     }
   }
 }
@@ -256,7 +302,7 @@ const formatPopulation = (population: string): string => {
 
 .cell-secondary {
   font-size: 14px;
-  color: #a0aec0;
+  color: #d1d5db;
   font-weight: 400;
 
   &.capitalize {
