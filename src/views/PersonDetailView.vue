@@ -33,7 +33,6 @@ onMounted(async () => {
 <style scoped lang="scss">
 .person-detail-view {
   min-height: 100vh;
-  background-color: #1f2937;
   padding: 2rem 0;
 }
 
