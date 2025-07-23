@@ -5,6 +5,11 @@ A Vue 3 application for exploring Star Wars characters and planets data with sea
 ![Vue.js](https://img.shields.io/badge/Vue.js-3.4-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
 
+## Live Demos
+
+- **Production**: [https://star-wars-challenge-production.netlify.app](https://star-wars-challenge-production.netlify.app)
+- **Staging**: [https://star-wars-challenge-staging.netlify.app](https://star-wars-challenge-staging.netlify.app)
+
 ## Features
 
 - Search and filter characters and planets
@@ -326,6 +331,27 @@ The application follows WCAG 2.1 AA guidelines:
 - Sufficient color contrast ratios
 - Skip links for navigation
 - Focus management on route changes
+
+## Design iteration
+
+### First mock
+<img width="1384" height="758" alt="image" src="https://github.com/user-attachments/assets/6dbb7111-c5f6-4663-828d-dd5a7eb9ea58" />
+
+<img width="1381" height="739" alt="image" src="https://github.com/user-attachments/assets/2c1d1164-c282-4039-922d-a73c4c6d8b1f" />
+
+### Second mock
+<img width="1373" height="756" alt="image" src="https://github.com/user-attachments/assets/4523765b-1c2d-4bf4-a174-cc49bb4b6874" />
+
+### Third mock
+<img width="1047" height="772" alt="image" src="https://github.com/user-attachments/assets/2bd63326-4e64-4f2f-9c5b-5ded321a3b4c" />
+
+### Final mock
+<img width="1137" height="877" alt="image" src="https://github.com/user-attachments/assets/e293268b-fd09-473a-9787-b9f378c4479d" />
+
+<img width="1201" height="880" alt="image" src="https://github.com/user-attachments/assets/f751fae0-7c20-4a80-8456-3dc13270d116" />
+
+<img width="1135" height="855" alt="image" src="https://github.com/user-attachments/assets/da543792-35d7-4125-8fcd-7766fe711927" />
+
 
 ## License
 
